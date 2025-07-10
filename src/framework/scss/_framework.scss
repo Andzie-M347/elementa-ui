@@ -1,0 +1,11 @@
+@use "./tokens/colors" as colors;
+@use "./hooks/colour-hooks" as color_hooks;
+
+@mixin elementa-framework-root-bundle($version, $prefix) {
+  @include colors.colour-module($version: "default", $root: true, $prefix: $prefix);
+}
+
+@mixin elementa-framework-style-hook-bundle($version, $prefix) {
+  @include color_hooks.color-styling-hooks("color", $prefix);
+  @include color_hooks.color-styling-hooks("background", $prefix);
+}

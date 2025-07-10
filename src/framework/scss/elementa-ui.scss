@@ -1,0 +1,10 @@
+@use "./framework" as framework;
+
+$prefix: "e-ui";
+$version: "default";
+
+:root {
+  @include framework.elementa-framework-root-bundle($version, $prefix);
+}
+
+@include framework.elementa-framework-style-hook-bundle($version, $prefix);

@@ -1,0 +1,82 @@
+@use "sass:string";
+
+// Color list for color-styling-hooks
+$colorList: (
+  "primary": "primary-color",
+  "primary-hover": "primary-color-hover",
+  "primary-10": "primary-color-10",
+  "primary-50": "primary-color-50",
+  "secondary": "secondary-color",
+  "secondary-hover": "secondary-color-hover",
+  "secondary-10": "secondary-color-10",
+  "secondary-50": "secondary-color-50",
+  "success": "success-color",
+  "success-hover": "success-color-hover",
+  "success-10": "success-color-10",
+  "success-50": "success-color-50",
+  "warning": "warning-color",
+  "warning-hover": "warning-color-hover",
+  "warning-10": "warning-color-10",
+  "warning-50": "warning-color-50",
+  "error": "error-color",
+  "error-hover": "error-color-hover",
+  "error-10": "error-color-10",
+  "error-50": "error-color-50",
+  "info": "info-color",
+  "info-hover": "info-color-hover",
+  "info-10": "info-color-10",
+  "info-50": "info-color-50",
+);
+
+@mixin color-styling-hooks($type: "color", $prefix) {
+  $property: #{$type};
+
+  @if ($type == "background") {
+    $property: background-color;
+  } @else if ($type == "border") {
+    $property: border-color;
+  } @else if ($type == "fill") {
+    $property: fill;
+  } @else if ($type == "stroke") {
+    $property: stroke;
+  } @else if ($type == "accent") {
+    $property: accent-color;
+  } @else if ($type == "caret") {
+    $property: caret-color;
+  } @else if ($type == "decoration") {
+    $property: text-decoration-color;
+  } @else if ($type == "shadow") {
+    $property: --tw-shadow-color;
+  }
+
+  @each $color, $var in $colorList {
+    // Base and opacity classes
+    @if (
+      string.index($var, "-hover") or
+        string.index($var, "-10") or
+        string.index($var, "-50")
+    ) {
+      .#{$prefix}-#{$type}_#{$color}:hover {
+        #{$property}: var(--#{$prefix}-#{$var});
+      }
+    } @else {
+      .#{$prefix}-#{$type}_#{$color} {
+        #{$property}: var(--#{$prefix}-#{$var});
+      }
+    }
+
+    // Dark mode variants
+    @if not(
+      string.index($var, "-hover") or
+        string.index($var, "-10") or
+        string.index($var, "-50")
+    )
+    {
+      .#{$prefix}-dark-#{$type}_#{$color} {
+        @media (prefers-color-scheme: dark) {
+          #{$property}: var(--#{$prefix}-#{$var}-dark);
+        }
+      }
+    }
+  }
+}

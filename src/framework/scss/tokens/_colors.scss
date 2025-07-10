@@ -1,0 +1,62 @@
+@use 'sass:color';
+
+@mixin colour-module(
+  $version: "default",
+  $root: false,
+  $prefix,
+  $primary: #0a3d62,
+  $secondary: #6d2f8a,
+  $success: #2ecc71,
+  $warning: #f1c40f,
+  $error: #e74c3c,
+  $info: #3498db
+) {
+  $primary-color: if($version == "dark", color.adjust($primary, $lightness: -10%), $primary);
+  $secondary-color: if($version == "dark", color.adjust($secondary, $lightness: -10%), $secondary);
+  $success-color: if($version == "dark", color.adjust($success, $lightness: -10%), $success);
+  $warning-color: if($version == "dark", color.adjust($warning, $lightness: -10%), $warning);
+  $error-color: if($version == "dark", color.adjust($error, $lightness: -10%), $error);
+  $info-color: if($version == "dark", color.adjust($info, $lightness: -10%), $info);
+
+  @if $root {
+    @at-root :root {
+      // Base colors
+      --#{$prefix}-primary-color: #{$primary-color};
+      --#{$prefix}-secondary-color: #{$secondary-color};
+      --#{$prefix}-success-color: #{$success-color};
+      --#{$prefix}-warning-color: #{$warning-color};
+      --#{$prefix}-error-color: #{$error-color};
+      --#{$prefix}-info-color: #{$info-color};
+
+      // Hover variants
+      --#{$prefix}-primary-color-hover: #{color.adjust($primary-color, $lightness: 10%)};
+      --#{$prefix}-secondary-color-hover: #{color.adjust($secondary-color, $lightness: 10%)};
+      --#{$prefix}-success-color-hover: #{color.adjust($success-color, $lightness: 10%)};
+      --#{$prefix}-warning-color-hover: #{color.adjust($warning-color, $lightness: 10%)};
+      --#{$prefix}-error-color-hover: #{color.adjust($error-color, $lightness: 10%)};
+      --#{$prefix}-info-color-hover: #{color.adjust($info-color, $lightness: 10%)};
+
+      // Opacity variants
+      --#{$prefix}-primary-color-10: #{color.change($primary-color, $alpha: 0.1)};
+      --#{$prefix}-primary-color-50: #{color.change($primary-color, $alpha: 0.5)};
+      --#{$prefix}-secondary-color-10: #{color.change($secondary-color, $alpha: 0.1)};
+      --#{$prefix}-secondary-color-50: #{color.change($secondary-color, $alpha: 0.5)};
+      --#{$prefix}-success-color-10: #{color.change($success-color, $alpha: 0.1)};
+      --#{$prefix}-success-color-50: #{color.change($success-color, $alpha: 0.5)};
+      --#{$prefix}-warning-color-10: #{color.change($warning-color, $alpha: 0.1)};
+      --#{$prefix}-warning-color-50: #{color.change($warning-color, $alpha: 0.5)};
+      --#{$prefix}-error-color-10: #{color.change($error-color, $alpha: 0.1)};
+      --#{$prefix}-error-color-50: #{color.change($error-color, $alpha: 0.5)};
+      --#{$prefix}-info-color-10: #{color.change($info-color, $alpha: 0.1)};
+      --#{$prefix}-info-color-50: #{color.change($info-color, $alpha: 0.5)};
+
+      // Dark mode variants
+      --#{$prefix}-primary-color-dark: #{color.adjust($primary-color, $lightness: -10%)};
+      --#{$prefix}-secondary-color-dark: #{color.adjust($secondary-color, $lightness: -10%)};
+      --#{$prefix}-success-color-dark: #{color.adjust($success-color, $lightness: -10%)};
+      --#{$prefix}-warning-color-dark: #{color.adjust($warning-color, $lightness: -10%)};
+      --#{$prefix}-error-color-dark: #{color.adjust($error-color, $lightness: -10%)};
+      --#{$prefix}-info-color-dark: #{color.adjust($info-color, $lightness: -10%)};
+    }
+  }
+}
