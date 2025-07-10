@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "scss": "npx sass --style=compressed  --watch src/framework/scss/elementa-ui.scss src/framework/css/dist/elementa-ui.min.css",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
