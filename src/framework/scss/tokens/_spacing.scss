@@ -1,0 +1,50 @@
+@use "sass:math";
+
+@mixin spacing-module($version, $prefix, $root: true) {
+  $SPACING_XXX_SMALL: null;
+  $SPACING_XX_SMALL: null;
+  $SPACING_X_SMALL: null;
+  $SPACING_SMALL: null;
+  $SPACING_MEDIUM: null;
+  $SPACING_LARGE: null;
+  $SPACING_X_LARGE: null;
+  $SPACING_XX_LARGE: null;
+  $SPACING_XXX_LARGE: null;
+  $SPACING_XXXX_LARGE: null;
+
+  $SPACING_XXX_SMALL: 0.125rem; // 2
+  $SPACING_XX_SMALL: 0.25rem; // 4
+  $SPACING_X_SMALL: 0.5rem; // 8
+  $SPACING_SMALL: 0.75rem; // 12
+  $SPACING_MEDIUM: 1rem; // 16
+  $SPACING_LARGE: 1.5rem; // 24
+  $SPACING_X_LARGE: 2rem; // 32
+  $SPACING_XX_LARGE: 2.5rem; // 40
+  $SPACING_XXX_LARGE: 3rem; // 48
+  $SPACING_XXXX_LARGE: 3.5rem; // 56
+
+  $sizeList: (
+    "xxx-small": $SPACING_XXX_SMALL,
+    "xx-small": $SPACING_XX_SMALL,
+    "x-small": $SPACING_X_SMALL,
+    "small": $SPACING_SMALL,
+    "medium": $SPACING_MEDIUM,
+    "large": $SPACING_LARGE,
+    "x-large": $SPACING_X_LARGE,
+    "xx-large": $SPACING_XX_LARGE,
+    "xxx-large": $SPACING_XXX_LARGE,
+    "xxxx-large": $SPACING_XXXX_LARGE,
+  );
+
+  $states: [true, false];
+  $directionList: [ "around", "vertical", "horizontal", "top", "right", "bottom",
+    "left"];
+
+  @if ($root == true) {
+    @at-root :root {
+      @each $size, $value in $sizeList {
+        --#{$prefix}-space-#{$size}: #{$value};
+      }
+    }
+  }
+}

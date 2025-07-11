@@ -3,8 +3,9 @@
 $prefix: "e-ui";
 $version: "default";
 
-:root {
+@at-root :root {
   @include framework.elementa-framework-root-bundle($version, $prefix);
 }
 
+// Inject styling hooks like utility classes (.e-ui-color_primary, etc.)
 @include framework.elementa-framework-style-hook-bundle($version, $prefix);
