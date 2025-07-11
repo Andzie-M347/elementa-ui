@@ -2,7 +2,6 @@
 
 @mixin colour-module(
   $version: "default",
-  $root: false,
   $prefix,
   $primary: #0a3d62,
   $secondary: #6d2f8a,
@@ -109,172 +108,150 @@
   $NEUTRAL-WHITE-COLOR: $neutral-white-color;
   $NEUTRAL-WHITE-75-COLOR: $neutral-white-75-color;
 
-  @if $root {
-    @at-root :root {
-      --#{$prefix}-primary-color: #{$PRIMARY-COLOR};
-      --#{$prefix}-secondary-color: #{$SECONDARY-COLOR};
-      --#{$prefix}-success-color: #{$SUCCESS-COLOR};
-      --#{$prefix}-warning-color: #{$WARNING-COLOR};
-      --#{$prefix}-error-color: #{$ERROR-COLOR};
-      --#{$prefix}-info-color: #{$INFO-COLOR};
-      --#{$prefix}-neutral-black-color: #{$NEUTRAL-BLACK-COLOR};
-      --#{$prefix}-primary-grey-color: #{$PRIMARY-GREY-COLOR};
-      --#{$prefix}-medium-grey-color: #{$MEDIUM-GREY-COLOR};
-      --#{$prefix}-light-grey-color: #{$LIGHT-GREY-COLOR};
-      --#{$prefix}-pale-grey-color: #{$PALE-GREY-COLOR};
-      --#{$prefix}-pale-grey-200-color: #{$PALE-GREY-200-COLOR};
-      --#{$prefix}-pale-grey-100-color: #{$PALE-GREY-100-COLOR};
-      --#{$prefix}-pale-grey-75-color: #{$PALE-GREY-75-COLOR};
-      --#{$prefix}-neutral-white-color: #{$NEUTRAL-WHITE-COLOR};
-      --#{$prefix}-neutral-white-75-color: #{$NEUTRAL-WHITE-75-COLOR};
-      --#{$prefix}-primary-color-hover: #{color.adjust(
-          $PRIMARY-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-secondary-color-hover: #{color.adjust(
-          $SECONDARY-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-success-color-hover: #{color.adjust(
-          $SUCCESS-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-warning-color-hover: #{color.adjust(
-          $WARNING-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-error-color-hover: #{color.adjust(
-          $ERROR-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-info-color-hover: #{color.adjust(
-          $INFO-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-neutral-black-color-hover: #262f3d;
-      --#{$prefix}-primary-grey-color-hover: #{color.adjust(
-          $PRIMARY-GREY-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-medium-grey-color-hover: #{color.adjust(
-          $MEDIUM-GREY-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-light-grey-color-hover: #{color.adjust(
-          $LIGHT-GREY-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-pale-grey-color-hover: #{color.adjust(
-          $PALE-GREY-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-pale-grey-200-color-hover: #{color.adjust(
-          $PALE-GREY-200-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-pale-grey-100-color-hover: #{color.adjust(
-          $PALE-GREY-100-COLOR,
-          $lightness: 10%
-        )};
-      --#{$prefix}-pale-grey-75-color-hover: #{color.adjust(
-          $PALE-GREY-75-COLOR,
-          $lightness: 5%
-        )};
-      --#{$prefix}-neutral-white-color-hover: #e5e5e5;
-      --#{$prefix}-neutral-white-75-color-hover: #e0e0e0;
-      --#{$prefix}-primary-color-10: #{rgba($PRIMARY-COLOR, 0.1)};
-      --#{$prefix}-primary-color-50: #{rgba($PRIMARY-COLOR, 0.5)};
-      --#{$prefix}-secondary-color-10: #{rgba($SECONDARY-COLOR, 0.1)};
-      --#{$prefix}-secondary-color-50: #{rgba($SECONDARY-COLOR, 0.5)};
-      --#{$prefix}-success-color-10: #{rgba($SUCCESS-COLOR, 0.1)};
-      --#{$prefix}-success-color-50: #{rgba($SUCCESS-COLOR, 0.5)};
-      --#{$prefix}-warning-color-10: #{rgba($WARNING-COLOR, 0.1)};
-      --#{$prefix}-warning-color-50: #{rgba($WARNING-COLOR, 0.5)};
-      --#{$prefix}-error-color-10: #{rgba($ERROR-COLOR, 0.1)};
-      --#{$prefix}-error-color-50: #{rgba($ERROR-COLOR, 0.5)};
-      --#{$prefix}-info-color-10: #{rgba($INFO-COLOR, 0.1)};
-      --#{$prefix}-info-color-50: #{rgba($INFO-COLOR, 0.5)};
-      --#{$prefix}-neutral-black-color-10: #{rgba($NEUTRAL-BLACK-COLOR, 0.1)};
-      --#{$prefix}-neutral-black-color-50: #{rgba($NEUTRAL-BLACK-COLOR, 0.5)};
-      --#{$prefix}-primary-grey-color-10: #{rgba($PRIMARY-GREY-COLOR, 0.1)};
-      --#{$prefix}-primary-grey-color-50: #{rgba($PRIMARY-GREY-COLOR, 0.5)};
-      --#{$prefix}-medium-grey-color-10: #{rgba($MEDIUM-GREY-COLOR, 0.1)};
-      --#{$prefix}-medium-grey-color-50: #{rgba($MEDIUM-GREY-COLOR, 0.5)};
-      --#{$prefix}-light-grey-color-10: #{rgba($LIGHT-GREY-COLOR, 0.1)};
-      --#{$prefix}-light-grey-color-50: #{rgba($LIGHT-GREY-COLOR, 0.5)};
-      --#{$prefix}-pale-grey-color-10: #{rgba($PALE-GREY-COLOR, 0.1)};
-      --#{$prefix}-pale-grey-color-50: #{rgba($PALE-GREY-COLOR, 0.5)};
-      --#{$prefix}-pale-grey-200-color-10: #{rgba($PALE-GREY-200-COLOR, 0.1)};
-      --#{$prefix}-pale-grey-200-color-50: #{rgba($PALE-GREY-200-COLOR, 0.5)};
-      --#{$prefix}-pale-grey-100-color-10: #{rgba($PALE-GREY-100-COLOR, 0.1)};
-      --#{$prefix}-pale-grey-100-color-50: #{rgba($PALE-GREY-100-COLOR, 0.5)};
-      --#{$prefix}-pale-grey-75-color-10: #{rgba($PALE-GREY-75-COLOR, 0.1)};
-      --#{$prefix}-pale-grey-75-color-50: #{rgba($PALE-GREY-75-COLOR, 0.5)};
-      --#{$prefix}-neutral-white-color-10: #{rgba($NEUTRAL-WHITE-COLOR, 0.1)};
-      --#{$prefix}-neutral-white-color-50: #{rgba($NEUTRAL-WHITE-COLOR, 0.5)};
-      --#{$prefix}-neutral-white-75-color-10: #{rgba(
-          $NEUTRAL-WHITE-75-COLOR,
-          0.1
-        )};
-      --#{$prefix}-neutral-white-75-color-50: #{rgba(
-          $NEUTRAL-WHITE-75-COLOR,
-          0.5
-        )};
-      --#{$prefix}-primary-color-dark: #{color.adjust(
-          $PRIMARY-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-secondary-color-dark: #{color.adjust(
-          $SECONDARY-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-success-color-dark: #{color.adjust(
-          $SUCCESS-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-warning-color-dark: #{color.adjust(
-          $WARNING-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-error-color-dark: #{color.adjust(
-          $ERROR-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-info-color-dark: #{color.adjust(
-          $INFO-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-neutral-black-color-dark: #1c2526;
-      --#{$prefix}-primary-grey-color-dark: #{color.adjust(
-          $PRIMARY-GREY-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-medium-grey-color-dark: #{color.adjust(
-          $MEDIUM-GREY-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-light-grey-color-dark: #{color.adjust(
-          $LIGHT-GREY-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-pale-grey-color-dark: #{color.adjust(
-          $PALE-GREY-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-pale-grey-200-color-dark: #{color.adjust(
-          $PALE-GREY-200-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-pale-grey-100-color-dark: #{color.adjust(
-          $PALE-GREY-100-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-pale-grey-75-color-dark: #{color.adjust(
-          $PALE-GREY-75-COLOR,
-          $lightness: -10%
-        )};
-      --#{$prefix}-neutral-white-color-dark: #d1d5db;
-      --#{$prefix}-neutral-white-75-color-dark: #e5e7eb;
-    }
-  }
+  --#{$prefix}-primary-color: #{$PRIMARY-COLOR};
+  --#{$prefix}-secondary-color: #{$SECONDARY-COLOR};
+  --#{$prefix}-success-color: #{$SUCCESS-COLOR};
+  --#{$prefix}-warning-color: #{$WARNING-COLOR};
+  --#{$prefix}-error-color: #{$ERROR-COLOR};
+  --#{$prefix}-info-color: #{$INFO-COLOR};
+  --#{$prefix}-neutral-black-color: #{$NEUTRAL-BLACK-COLOR};
+  --#{$prefix}-primary-grey-color: #{$PRIMARY-GREY-COLOR};
+  --#{$prefix}-medium-grey-color: #{$MEDIUM-GREY-COLOR};
+  --#{$prefix}-light-grey-color: #{$LIGHT-GREY-COLOR};
+  --#{$prefix}-pale-grey-color: #{$PALE-GREY-COLOR};
+  --#{$prefix}-pale-grey-200-color: #{$PALE-GREY-200-COLOR};
+  --#{$prefix}-pale-grey-100-color: #{$PALE-GREY-100-COLOR};
+  --#{$prefix}-pale-grey-75-color: #{$PALE-GREY-75-COLOR};
+  --#{$prefix}-neutral-white-color: #{$NEUTRAL-WHITE-COLOR};
+  --#{$prefix}-neutral-white-75-color: #{$NEUTRAL-WHITE-75-COLOR};
+  --#{$prefix}-primary-color-hover: #{color.adjust(
+      $PRIMARY-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-secondary-color-hover: #{color.adjust(
+      $SECONDARY-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-success-color-hover: #{color.adjust(
+      $SUCCESS-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-warning-color-hover: #{color.adjust(
+      $WARNING-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-error-color-hover: #{color.adjust($ERROR-COLOR, $lightness: 10%)};
+  --#{$prefix}-info-color-hover: #{color.adjust($INFO-COLOR, $lightness: 10%)};
+  --#{$prefix}-neutral-black-color-hover: #262f3d;
+  --#{$prefix}-primary-grey-color-hover: #{color.adjust(
+      $PRIMARY-GREY-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-medium-grey-color-hover: #{color.adjust(
+      $MEDIUM-GREY-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-light-grey-color-hover: #{color.adjust(
+      $LIGHT-GREY-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-pale-grey-color-hover: #{color.adjust(
+      $PALE-GREY-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-pale-grey-200-color-hover: #{color.adjust(
+      $PALE-GREY-200-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-pale-grey-100-color-hover: #{color.adjust(
+      $PALE-GREY-100-COLOR,
+      $lightness: 10%
+    )};
+  --#{$prefix}-pale-grey-75-color-hover: #{color.adjust(
+      $PALE-GREY-75-COLOR,
+      $lightness: 5%
+    )};
+  --#{$prefix}-neutral-white-color-hover: #e5e5e5;
+  --#{$prefix}-neutral-white-75-color-hover: #e0e0e0;
+  --#{$prefix}-primary-color-10: #{rgba($PRIMARY-COLOR, 0.1)};
+  --#{$prefix}-primary-color-50: #{rgba($PRIMARY-COLOR, 0.5)};
+  --#{$prefix}-secondary-color-10: #{rgba($SECONDARY-COLOR, 0.1)};
+  --#{$prefix}-secondary-color-50: #{rgba($SECONDARY-COLOR, 0.5)};
+  --#{$prefix}-success-color-10: #{rgba($SUCCESS-COLOR, 0.1)};
+  --#{$prefix}-success-color-50: #{rgba($SUCCESS-COLOR, 0.5)};
+  --#{$prefix}-warning-color-10: #{rgba($WARNING-COLOR, 0.1)};
+  --#{$prefix}-warning-color-50: #{rgba($WARNING-COLOR, 0.5)};
+  --#{$prefix}-error-color-10: #{rgba($ERROR-COLOR, 0.1)};
+  --#{$prefix}-error-color-50: #{rgba($ERROR-COLOR, 0.5)};
+  --#{$prefix}-info-color-10: #{rgba($INFO-COLOR, 0.1)};
+  --#{$prefix}-info-color-50: #{rgba($INFO-COLOR, 0.5)};
+  --#{$prefix}-neutral-black-color-10: #{rgba($NEUTRAL-BLACK-COLOR, 0.1)};
+  --#{$prefix}-neutral-black-color-50: #{rgba($NEUTRAL-BLACK-COLOR, 0.5)};
+  --#{$prefix}-primary-grey-color-10: #{rgba($PRIMARY-GREY-COLOR, 0.1)};
+  --#{$prefix}-primary-grey-color-50: #{rgba($PRIMARY-GREY-COLOR, 0.5)};
+  --#{$prefix}-medium-grey-color-10: #{rgba($MEDIUM-GREY-COLOR, 0.1)};
+  --#{$prefix}-medium-grey-color-50: #{rgba($MEDIUM-GREY-COLOR, 0.5)};
+  --#{$prefix}-light-grey-color-10: #{rgba($LIGHT-GREY-COLOR, 0.1)};
+  --#{$prefix}-light-grey-color-50: #{rgba($LIGHT-GREY-COLOR, 0.5)};
+  --#{$prefix}-pale-grey-color-10: #{rgba($PALE-GREY-COLOR, 0.1)};
+  --#{$prefix}-pale-grey-color-50: #{rgba($PALE-GREY-COLOR, 0.5)};
+  --#{$prefix}-pale-grey-200-color-10: #{rgba($PALE-GREY-200-COLOR, 0.1)};
+  --#{$prefix}-pale-grey-200-color-50: #{rgba($PALE-GREY-200-COLOR, 0.5)};
+  --#{$prefix}-pale-grey-100-color-10: #{rgba($PALE-GREY-100-COLOR, 0.1)};
+  --#{$prefix}-pale-grey-100-color-50: #{rgba($PALE-GREY-100-COLOR, 0.5)};
+  --#{$prefix}-pale-grey-75-color-10: #{rgba($PALE-GREY-75-COLOR, 0.1)};
+  --#{$prefix}-pale-grey-75-color-50: #{rgba($PALE-GREY-75-COLOR, 0.5)};
+  --#{$prefix}-neutral-white-color-10: #{rgba($NEUTRAL-WHITE-COLOR, 0.1)};
+  --#{$prefix}-neutral-white-color-50: #{rgba($NEUTRAL-WHITE-COLOR, 0.5)};
+  --#{$prefix}-neutral-white-75-color-10: #{rgba($NEUTRAL-WHITE-75-COLOR, 0.1)};
+  --#{$prefix}-neutral-white-75-color-50: #{rgba($NEUTRAL-WHITE-75-COLOR, 0.5)};
+  --#{$prefix}-primary-color-dark: #{color.adjust(
+      $PRIMARY-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-secondary-color-dark: #{color.adjust(
+      $SECONDARY-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-success-color-dark: #{color.adjust(
+      $SUCCESS-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-warning-color-dark: #{color.adjust(
+      $WARNING-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-error-color-dark: #{color.adjust($ERROR-COLOR, $lightness: -10%)};
+  --#{$prefix}-info-color-dark: #{color.adjust($INFO-COLOR, $lightness: -10%)};
+  --#{$prefix}-neutral-black-color-dark: #1c2526;
+  --#{$prefix}-primary-grey-color-dark: #{color.adjust(
+      $PRIMARY-GREY-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-medium-grey-color-dark: #{color.adjust(
+      $MEDIUM-GREY-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-light-grey-color-dark: #{color.adjust(
+      $LIGHT-GREY-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-pale-grey-color-dark: #{color.adjust(
+      $PALE-GREY-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-pale-grey-200-color-dark: #{color.adjust(
+      $PALE-GREY-200-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-pale-grey-100-color-dark: #{color.adjust(
+      $PALE-GREY-100-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-pale-grey-75-color-dark: #{color.adjust(
+      $PALE-GREY-75-COLOR,
+      $lightness: -10%
+    )};
+  --#{$prefix}-neutral-white-color-dark: #d1d5db;
+  --#{$prefix}-neutral-white-75-color-dark: #e5e7eb;
 }

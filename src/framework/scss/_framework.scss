@@ -2,14 +2,17 @@
 @use "./tokens/spacing" as spacing;
 @use "./hooks/colour-hooks" as color_hooks;
 
-@mixin elementa-framework-root-bundle($version, $prefix) {
-  @include colors.colour-module(
-    $version: "default",
-    $root: true,
-    $prefix: $prefix
-  );
+@mixin generate-css-vars($map) {
+  @each $key, $value in $map {
+    #{$key}: #{$value};
+  }
+}
 
-  @include spacing.spacing-module($version, $prefix, $root: true);
+@mixin elementa-framework-root-bundle($version, $prefix) {
+  @at-root :root {
+    @include generate-css-vars(spacing.get-spacing-vars($prefix));
+    @include colors.colour-module($version: "default", $prefix: $prefix);
+  }
 }
 
 @mixin elementa-framework-style-hook-bundle($version, $prefix) {
