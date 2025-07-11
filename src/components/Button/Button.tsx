@@ -6,10 +6,10 @@ const baseStyles =
   'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-xl';
 
 const variantStyles = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-  secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 focus:ring-gray-400',
-  tertiary: 'bg-transparent text-blue-600 hover:bg-blue-50 focus:ring-blue-300',
-  danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
+   primary: 'e-ui-background_primary e-ui-color_neutral-white hover:e-ui-background_primary-hover focus:ring-e-ui-primary-color',
+  secondary: 'e-ui-background_secondary e-ui-color_neutral-white hover:e-ui-background_secondary-hover focus:ring-e-ui-secondary-color',
+  tertiary: 'bg-transparent e-ui-color_info hover:e-ui-background_info-10 focus:ring-e-ui-info-color',
+  danger: 'e-ui-background_error e-ui-color_neutral-white hover:e-ui-background_error-hover focus:ring-e-ui-error-color',
 };
 
 const sizeStyles = {

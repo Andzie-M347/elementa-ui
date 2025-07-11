@@ -1,8 +1,8 @@
 import type { Preview } from '@storybook/react-vite'
 import { withA11y } from '@storybook/addon-a11y';
 
-import '../src/styles/token.css'
 
+import '../src/framework/css/dist/elementa-ui.min.css'
 
 // export const decorators = [withA11y];
 
