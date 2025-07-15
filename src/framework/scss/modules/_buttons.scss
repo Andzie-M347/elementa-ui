@@ -1,0 +1,119 @@
+@use "../tokens/colors" as *;
+@use "../tokens/spacing" as *;
+@use "../utils/mixins" as *;
+@use "sass:map";
+
+$button-sizes: (
+  sm: (
+    font-size: "text-sm",
+    padding-y: "space-xx-small",
+    padding-x: "space-small",
+  ),
+  md: (
+    font-size: "text-md",
+    padding-y: "space-x-small",
+    padding-x: "space-medium",
+  ),
+  lg: (
+    font-size: "text-lg",
+    padding-y: "space-small",
+    padding-x: "space-large",
+  ),
+) !default;
+
+@mixin button-classes($prefix) {
+  .#{$prefix}-btn {
+    @include flex-center;
+    appearance: none;
+    font-weight: 500;
+    border: none;
+    border-radius: var(--#{$prefix}-radius-md);
+    line-height: 1.25;
+    white-space: nowrap;
+    // width: var(--#{$prefix}-w-auto);
+    transition: background-color 0.2s ease, color 0.2s ease,
+      box-shadow 0.2s ease;
+    cursor: pointer;
+
+    &:disabled,
+    &[aria-busy="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--#{$prefix}-primary-color-50);
+    }
+
+    &--full {
+      width: var(--#{$prefix}-w-full);
+    }
+
+    &--fit {
+      width: var(--#{$prefix}-w-fit);
+    }
+  }
+
+  // Variants
+  .#{$prefix}-btn--primary {
+    background-color: var(--#{$prefix}-primary-color);
+    color: var(--#{$prefix}-neutral-white-color);
+
+    &:hover {
+      background-color: var(--#{$prefix}-primary-color-hover);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--#{$prefix}-primary-color-dark);
+    }
+  }
+
+  .#{$prefix}-btn--secondary {
+    background-color: var(--#{$prefix}-secondary-color);
+    color: var(--#{$prefix}-neutral-white-color);
+
+    &:hover {
+      background-color: var(--#{$prefix}-secondary-color-hover);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--#{$prefix}-secondary-color-dark);
+    }
+  }
+
+  .#{$prefix}-btn--tertiary {
+    background-color: transparent;
+    color: var(--#{$prefix}-primary-color);
+
+    &:hover {
+      background-color: var(--#{$prefix}-primary-color-10);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: var(--#{$prefix}-primary-color-dark);
+    }
+  }
+
+  .#{$prefix}-btn--danger {
+    background-color: var(--#{$prefix}-error-color);
+    color: var(--#{$prefix}-neutral-white-color);
+
+    &:hover {
+      background-color: var(--#{$prefix}-error-color-hover);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      background-color: var(--#{$prefix}-error-color-dark);
+    }
+  }
+
+  // Sizes
+  @each $size, $tokens in $button-sizes {
+    .#{$prefix}-btn--#{$size} {
+      font-size: var(--#{$prefix}-#{map.get($tokens, font-size)});
+      padding: var(--#{$prefix}-#{map.get($tokens, padding-y)})
+        var(--#{$prefix}-#{map.get($tokens, padding-x)});
+    }
+  }
+}

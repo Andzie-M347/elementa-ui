@@ -3,7 +3,7 @@ import { FC } from 'react';
 export const ArrowRight: FC<{ className?: string }> = ({ className }) => (
   <svg
     className={className}
-    fill="none"
+    fill="currentColor"
     stroke="currentColor"
     strokeWidth="2"
     viewBox="0 0 24 24"

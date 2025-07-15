@@ -1,16 +1,19 @@
 @use "./tokens/colors" as colors;
 @use "./tokens/spacing" as spacing;
-@use "./hooks/colour-hooks" as color_hooks;
+@use "./tokens/radius" as radius;
+@use "./tokens/width" as width;
 
-@mixin generate-css-vars($map) {
-  @each $key, $value in $map {
-    #{$key}: #{$value};
-  }
-}
+@use "./hooks/colour-hooks" as color_hooks;
+@use "./hooks/radius-hooks" as radius_hooks;
+@use "./hooks/width-hooks" as width_hooks;
+
+@use "./utils/mixins" as *;
 
 @mixin elementa-framework-root-bundle($version, $prefix) {
   @at-root :root {
     @include generate-css-vars(spacing.get-spacing-vars($prefix));
+    @include generate-css-vars(radius.get-radius-vars($prefix));
+    @include generate-css-vars(width.get-width-vars($prefix));
     @include colors.colour-module($version: "default", $prefix: $prefix);
   }
 }
@@ -18,4 +21,7 @@
 @mixin elementa-framework-style-hook-bundle($version, $prefix) {
   @include color_hooks.color-styling-hooks("color", $prefix);
   @include color_hooks.color-styling-hooks("background", $prefix);
+
+  @include width_hooks.width-styling-hooks($prefix);
+  @include radius_hooks.radius-styling-hooks($prefix);
 }

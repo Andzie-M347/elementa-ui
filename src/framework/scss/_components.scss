@@ -1,0 +1,5 @@
+@use "./modules/buttons" as btn;
+
+@mixin elementa-button-component($version, $prefix) {
+  @include btn.button-classes($prefix);
+}

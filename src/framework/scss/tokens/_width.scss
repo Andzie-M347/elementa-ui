@@ -1,0 +1,22 @@
+@use "sass:map";
+
+$width-values: (
+  "full": 100%,
+  "auto": auto,
+  "fit": fit-content,
+  "screen": 100vw,
+) !default;
+
+@function get-width-vars($prefix) {
+  $output: ();
+  @each $key, $value in $width-values {
+    $css-var: "--#{$prefix}-w-#{$key}";
+    $output: map.merge(
+      $output,
+      (
+        $css-var: $value,
+      )
+    );
+  }
+  @return $output;
+}

@@ -1,5 +1,5 @@
 // tokens/_spacing.scss
-@use "sass:map"; // ← NEW
+@use "sass:map";
 
 $spacing-values: (
   "xxx-small": 0.125rem,
@@ -14,7 +14,7 @@ $spacing-values: (
   "xxxx-large": 3.5rem,
 ) !default;
 
-@function get-spacing-vars($prefix: "e-ui") {
+@function get-spacing-vars($prefix) {
   $output: ();
 
   @each $size, $value in $spacing-values {
@@ -24,7 +24,7 @@ $spacing-values: (
       (
         $key: $value,
       )
-    ); // now map.merge is recognised
+    );
   }
 
   @return $output;

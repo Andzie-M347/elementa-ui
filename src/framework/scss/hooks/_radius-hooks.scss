@@ -1,0 +1,11 @@
+@use "sass:map";
+
+$radius-hooks: ("none", "xs", "sm", "md", "lg", "xl", "2xl", "full") !default;
+
+@mixin radius-styling-hooks($prefix) {
+  @each $name in $radius-hooks {
+    .#{$prefix}-radius-#{$name} {
+      border-radius: var(--#{$prefix}-radius-#{$name});
+    }
+  }
+}
