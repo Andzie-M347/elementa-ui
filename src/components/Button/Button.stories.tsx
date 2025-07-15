@@ -1,7 +1,11 @@
-// src/components/Button/Button.stories.tsx
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { Button } from './Button';
 import { iconOptions } from './iconOptions';
+
+// Extend ButtonProps to include icon as a string for Storybook controls
+interface ButtonStoryProps extends Omit<ButtonProps, 'icon'> {
+  icon: keyof typeof iconOptions;
+}
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -11,10 +15,12 @@ const meta: Meta<typeof Button> = {
     variant: {
       control: { type: 'select' },
       options: ['primary', 'secondary', 'tertiary', 'danger'],
+      description: 'Button style variant',
     },
     size: {
       control: { type: 'radio' },
       options: ['sm', 'md', 'lg'],
+      description: 'Button size',
     },
     icon: {
       control: {
@@ -26,23 +32,61 @@ const meta: Meta<typeof Button> = {
         },
       },
       options: Object.keys(iconOptions),
+      description: 'Icon from iconOptions',
     },
     iconPosition: {
       control: 'inline-radio',
       options: ['left', 'right'],
+      description: 'Position of the icon',
     },
-    fullWidth: { control: 'boolean' },
-    isLoading: { control: 'boolean' },
-    disabled: { control: 'boolean' },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Make button full-width',
+    },
+    isLoading: {
+      control: 'boolean',
+      description: 'Show loading state',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Disable button',
+    },
+    type: {
+      control: 'select',
+      options: ['button', 'submit', 'reset'],
+      description: 'Button type attribute',
+    },
+    prefix: {
+      control: 'text',
+      description: 'CSS class prefix for styling',
+      defaultValue: 'e-ui',
+    },
+    'aria-label': {
+      control: 'text',
+      description: 'ARIA label for accessibility',
+    },
+    onClick: { action: 'clicked', description: 'Click event handler' },
+  },
+  args: {
+    variant: 'primary',
+    size: 'md',
+    fullWidth: false,
+    isLoading: false,
+    disabled: false,
+    icon: 'None',
+    iconPosition: 'left',
+    children: 'Click Me',
+    type: 'button',
+    prefix: 'e-ui',
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<ButtonStoryProps>;
 
-const Template: StoryFn<typeof Button> = ({ icon, ...args }) => {
-  const IconComponent = iconOptions[icon as keyof typeof iconOptions];
-  return <Button {...args} icon={IconComponent} />;
+const Template: StoryFn<ButtonStoryProps> = ({ icon, ...args }) => {
+  const IconComponent = iconOptions[icon];
+  return <Button {...args} icon={IconComponent ? <IconComponent className="w-4 h-4" /> : null} />;
 };
 
 export const Primary: Story = Template.bind({});
@@ -53,24 +97,8 @@ Primary.args = {
   icon: 'None',
 };
 
-export const WithIconLeft: Story = Template.bind({});
-WithIconLeft.args = {
-  children: 'Continue',
-  icon: 'ArrowRight',
-  iconPosition: 'left',
-  variant: 'primary',
-};
-
-export const WithIconRight: Story = Template.bind({});
-WithIconRight.args = {
-  children: 'Continue',
-  icon: 'ArrowRight',
-  iconPosition: 'right',
-  variant: 'primary',
-};
-
-export const IconOnly: Story = Template.bind({});
-IconOnly.args = {
+export const IconButton: Story = Template.bind({});
+IconButton.args = {
   icon: 'Plus',
   'aria-label': 'Add item',
   variant: 'secondary',
@@ -98,3 +126,4 @@ FullWidth.args = {
   fullWidth: true,
   icon: 'None',
 };
+
