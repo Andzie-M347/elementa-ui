@@ -69,14 +69,14 @@ const getButtonClasses = (
 
 /** Maps button sizes to padding and font size utility classes */
 const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
-  sm: 'px-3 py-1 text-sm',
+  sm: 'e-ui-p-x_medium',
   md: 'px-4 py-2 text-base',
   lg: 'px-6 py-3 text-lg',
 };
 
 /** Maps button variants to color and interaction utility classes */
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500',
+  primary: '',
   secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-2 focus:ring-gray-400',
   tertiary: 'bg-transparent text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-300',
   danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500',

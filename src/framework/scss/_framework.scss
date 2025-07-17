@@ -4,6 +4,7 @@
 @use "./tokens/width" as width;
 
 @use "./hooks/colour-hooks" as color_hooks;
+@use "./hooks/spacing-hooks" as spacing_hooks;
 @use "./hooks/radius-hooks" as radius_hooks;
 @use "./hooks/width-hooks" as width_hooks;
 
@@ -22,6 +23,7 @@
   @include color_hooks.color-styling-hooks("color", $prefix);
   @include color_hooks.color-styling-hooks("background", $prefix);
 
+  @include spacing_hooks.spacing-styling-hooks($prefix);
   @include width_hooks.width-styling-hooks($prefix);
   @include radius_hooks.radius-styling-hooks($prefix);
 }

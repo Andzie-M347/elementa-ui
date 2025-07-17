@@ -1,5 +1,7 @@
 @use "./modules/buttons" as btn;
+@use "./modules/spinner" as spinner;
 
 @mixin elementa-button-component($version, $prefix) {
   @include btn.button-classes($prefix);
+  @include spinner.spinner-classes($prefix);
 }
