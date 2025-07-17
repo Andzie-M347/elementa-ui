@@ -101,7 +101,6 @@ const Template: StoryFn<ButtonStoryProps> = ({ icon, ...args }) => {
         />
       </div>
 
-
       <div
         style={{
           border: "1px solid #e5e7eb",

@@ -15,7 +15,15 @@
     @include generate-css-vars(spacing.get-spacing-vars($prefix));
     @include generate-css-vars(radius.get-radius-vars($prefix));
     @include generate-css-vars(width.get-width-vars($prefix));
-    @include colors.colour-module($version: "default", $prefix: $prefix);
+    @include colors.colour-module(
+      $version: "default",
+      $prefix: $prefix,
+      // OVERRIDES EXAMPLE
+      // $overrides: (
+      //   primary: #0057ff,
+      //   success: #00cc99,
+      // )
+    );
   }
 }
 
