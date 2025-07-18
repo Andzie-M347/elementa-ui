@@ -30,6 +30,9 @@ importers:
       '@eslint/js':
         specifier: ^9.25.0
         version: 9.29.0
+      '@mdx-js/react':
+        specifier: ^3.1.0
+        version: 3.1.0(@types/react@19.1.8)(react@19.1.0)
       '@storybook/addon-a11y':
         specifier: ^9.0.16
         version: 9.0.16(storybook@9.0.12(@testing-library/dom@10.4.0))

@@ -8,6 +8,7 @@
 import clsx from "clsx";
 import { forwardRef, ForwardedRef, ReactNode } from "react";
 import { buttonConfig } from "./button.config";
+import { Spinner } from "../Spinner";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "tertiary" | "danger";
@@ -83,7 +84,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           getButtonClasses(variant, size, fullWidth, isIconOnly, prefix),
           mergedSizeStyles[size],
           mergedVariantStyles[variant],
-          disabled && "opacity-50 cursor-not-allowed",
+          disabled,
           className
         )}
         disabled={disabled || isLoading}
@@ -92,25 +93,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
       >
         {isLoading ? (
-          <svg
-            className="animate-spin h-5 w-5 text-current mx-auto"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-          >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-              opacity="0.3"
-            />
-            <path
-              d="M12 2a10 10 0 0 1 10 10h-2a8 8 0 0 0-8-8V2z"
-              fill="currentColor"
-            />
-          </svg>
+          // Elementa Spinner component
+          <Spinner size="sm" variant="ring" color="#f5f6f8" speed="1s" />
         ) : (
           <>
             {icon && iconPosition === "left" && (

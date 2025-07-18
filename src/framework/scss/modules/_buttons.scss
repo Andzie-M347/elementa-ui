@@ -25,9 +25,9 @@ $button-sizes: (
   .#{$prefix}-btn {
     @include flex-center;
     appearance: none;
-    font-weight: 500;
+    // font-weight: 500;
     border: none;
-    border-radius: var(--#{$prefix}-radius-md);
+    // border-radius: var(--#{$prefix}-radius-md);
     line-height: 1.25;
     white-space: nowrap;
     // width: var(--#{$prefix}-w-auto);
