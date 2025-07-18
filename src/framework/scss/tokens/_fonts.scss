@@ -1,0 +1,21 @@
+@use "sass:map";
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+$font-hooks: ("opensans") !default;
+
+$elementa-font-values: (
+  opensans: '"Open Sans", sans-serif',
+) !default;
+
+/// Font token generator
+/// @param {String} $prefix
+/// @param {Map} $overrides
+///
+@mixin font-module($prefix, $overrides: ()) {
+  $merged-fonts: map.merge($elementa-font-values, $overrides);
+
+  @each $font-name, $font-value in $merged-fonts {
+    --#{$prefix}-font-#{$font-name}: #{$font-value};
+  }
+}

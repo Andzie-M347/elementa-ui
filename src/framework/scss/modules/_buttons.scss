@@ -5,17 +5,20 @@
 
 $button-sizes: (
   sm: (
-    font-size: "text-sm",
+    font-size: "font-size-14",
+    // 0.875rem
     padding-y: "space-xx-small",
     padding-x: "space-small",
   ),
   md: (
-    font-size: "text-md",
+    font-size: "font-size-16",
+    // 1rem
     padding-y: "space-x-small",
     padding-x: "space-medium",
   ),
   lg: (
-    font-size: "text-lg",
+    font-size: "font-size-18",
+    // 1.125rem
     padding-y: "space-small",
     padding-x: "space-large",
   ),
@@ -24,8 +27,8 @@ $button-sizes: (
 @mixin button-classes($prefix) {
   .#{$prefix}-btn {
     @include flex-center;
-    appearance: none;
-    // font-weight: 500;
+    font-weight: var(--#{$prefix}-font-weight-medium, 500);
+
     border: none;
     // border-radius: var(--#{$prefix}-radius-md);
     line-height: 1.25;

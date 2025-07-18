@@ -1,0 +1,16 @@
+@use "sass:map";
+@use "../tokens/typography" as *;
+
+@mixin typography-styling-hooks($prefix) {
+  @each $weight in $font-weight-hooks {
+    .#{$prefix}-font-#{$weight} {
+      font-weight: var(--#{$prefix}-font-weight-#{$weight});
+    }
+  }
+
+  @each $size in $font-size-hooks {
+    .#{$prefix}-text-#{$size} {
+      font-size: var(--#{$prefix}-font-size-#{$size});
+    }
+  }
+}
