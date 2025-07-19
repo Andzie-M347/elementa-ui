@@ -77,40 +77,42 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     return (
-      <button
-        ref={ref}
-        type={type}
-        className={clsx(
-          getButtonClasses(variant, size, fullWidth, isIconOnly, prefix),
-          mergedSizeStyles[size],
-          mergedVariantStyles[variant],
-          disabled,
-          className
-        )}
-        disabled={disabled || isLoading}
-        aria-busy={isLoading}
-        aria-label={isLoading ? "Loading" : ariaLabel}
-        onClick={onClick}
-      >
-        {isLoading ? (
-          // Elementa Spinner component
-          <Spinner size="sm" variant="ring" color="#f5f6f8" speed="1s" />
-        ) : (
-          <>
-            {icon && iconPosition === "left" && (
-              <span className={clsx("inline-flex", { "mr-2": !isIconOnly })}>
-                {icon}
-              </span>
-            )}
-            {children}
-            {icon && iconPosition === "right" && (
-              <span className={clsx("inline-flex", { "ml-2": !isIconOnly })}>
-                {icon}
-              </span>
-            )}
-          </>
-        )}
-      </button>
+      <>
+        <button
+          ref={ref}
+          type={type}
+          className={clsx(
+            getButtonClasses(variant, size, fullWidth, isIconOnly, prefix),
+            mergedSizeStyles[size],
+            mergedVariantStyles[variant],
+            disabled,
+            className
+          )}
+          disabled={disabled || isLoading}
+          aria-busy={isLoading}
+          aria-label={isLoading ? "Loading" : ariaLabel}
+          onClick={onClick}
+        >
+          {isLoading ? (
+            // Elementa Spinner component
+            <Spinner size="sm" variant="ring" color="#f5f6f8" speed="1s" />
+          ) : (
+            <>
+              {icon && iconPosition === "left" && (
+                <span className={clsx("inline-flex", { "mr-2": !isIconOnly })}>
+                  {icon}
+                </span>
+              )}
+              {children}
+              {icon && iconPosition === "right" && (
+                <span className={clsx("inline-flex", { "ml-2": !isIconOnly })}>
+                  {icon}
+                </span>
+              )}
+            </>
+          )}
+        </button>
+      </>
     );
   }
 );
