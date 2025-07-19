@@ -1,14 +1,46 @@
 @use "sass:map";
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+// ----------------------------------------------------
+// Local Font-Face Declarations
+// ----------------------------------------------------
 
-$font-hooks: ("opensans") !default;
+@font-face {
+  font-family: "SF Pro";
+  src: url("/src/framework/fonts/SFProDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro";
+  src: url("/src/framework/fonts/SFProDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro";
+  src: url("/src/framework/fonts/SFProDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ----------------------------------------------------
+// Elementa Font Token System
+// ----------------------------------------------------
+
+$font-hooks: ("sfpro") !default;
 
 $elementa-font-values: (
-  opensans: '"Open Sans", sans-serif',
+  sfpro: '"SF Pro"',
 ) !default;
 
 /// Font token generator
+/// Outputs: --[prefix]-font-[font-name]: [font-stack];
+/// Example: --e-ui-font-sfpro: "SF Pro", ...
 /// @param {String} $prefix
 /// @param {Map} $overrides
 ///

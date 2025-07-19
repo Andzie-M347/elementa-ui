@@ -9,7 +9,7 @@ export const buttonConfig = {
 
   variantStyles: {
     primary:
-      "e-ui-background_primary e-ui-radius-none e-ui-color_neutral-white e-ui-background_primary-hover",
+      "e-ui-background_primary e-ui-radius-full e-ui-color_neutral-white e-ui-background_primary-hover",
     secondary: "",
     tertiary: "",
     danger: "",

@@ -27,7 +27,7 @@ $button-sizes: (
 @mixin button-classes($prefix) {
   .#{$prefix}-btn {
     @include flex-center;
-    font-weight: var(--#{$prefix}-font-weight-medium, 500);
+    font-weight: var(--#{$prefix}-font-weight-bold, 700);
 
     border: none;
     // border-radius: var(--#{$prefix}-radius-md);
