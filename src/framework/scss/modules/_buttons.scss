@@ -2,25 +2,21 @@
 @use "../tokens/spacing" as *;
 @use "../utils/mixins" as *;
 @use "sass:map";
-
 $button-sizes: (
   sm: (
     font-size: "font-size-14",
-    // 0.875rem
-    padding-y: "space-xx-small",
+    height: "h-40",
     padding-x: "space-small",
   ),
   md: (
     font-size: "font-size-16",
-    // 1rem
-    padding-y: "space-x-small",
-    padding-x: "space-medium",
+    height: "h-48",
+    padding-x: "space-large",
   ),
   lg: (
     font-size: "font-size-18",
-    // 1.125rem
-    padding-y: "space-small",
-    padding-x: "space-large",
+    height: "h-48",
+    padding-x: "space-x-large",
   ),
 ) !default;
 
@@ -115,8 +111,8 @@ $button-sizes: (
   @each $size, $tokens in $button-sizes {
     .#{$prefix}-btn--#{$size} {
       font-size: var(--#{$prefix}-#{map.get($tokens, font-size)});
-      padding: var(--#{$prefix}-#{map.get($tokens, padding-y)})
-        var(--#{$prefix}-#{map.get($tokens, padding-x)});
+      height: var(--#{$prefix}-#{map.get($tokens, height)});
+      padding: 0 var(--#{$prefix}-#{map.get($tokens, padding-x)});
     }
   }
 }

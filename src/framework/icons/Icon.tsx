@@ -10,12 +10,8 @@ type IconProps = {
   className?: string;
 };
 
-export const Icon = ({
-  name,
-  size = "md",
-  color = "currentColor",
-  className = "",
-}: IconProps) => {
+// ! TBC to ElementaIcon
+export const Icon = ({ name, size = "md", className = "" }: IconProps) => {
   const SvgIcon = iconMap[name];
   const resolvedSize =
     size === "sm"
