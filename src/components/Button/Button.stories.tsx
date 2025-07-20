@@ -9,6 +9,7 @@ import { Highlight, themes } from "prism-react-renderer";
 
 interface ButtonStoryProps extends Omit<ButtonProps, "icon"> {
   icon: keyof typeof iconOptions;
+  iconColor?: string;
 }
 
 const meta: Meta<typeof Button> = {
@@ -20,6 +21,7 @@ const meta: Meta<typeof Button> = {
       control: "select",
       options: ["primary", "secondary", "tertiary", "danger"],
     },
+    iconColor: { control: "color" },
     size: { control: "radio", options: ["sm", "md", "lg"] },
     icon: { control: "select", options: Object.keys(iconOptions) },
     iconPosition: { control: "inline-radio", options: ["left", "right"] },
@@ -95,10 +97,7 @@ const Template: StoryFn<ButtonStoryProps> = ({ icon, ...args }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
       <div style={{ display: "inline-flex" }}>
-        <Button
-          {...args}
-          icon={IconComponent ? <IconComponent className="w-4 h-4" /> : null}
-        />
+        <Button {...args} icon={IconComponent ? <IconComponent /> : null} />
       </div>
 
       <div

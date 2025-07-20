@@ -1,7 +1,5 @@
-import { ArrowRight } from '../Icons/ArrowRight';
+// export { iconMap as iconOptions } from './icon-map';
+// export type { IconName } from './icon-map';
 
-
-export const iconOptions = {
-  None: null,
-  ArrowRight: ArrowRight,
-};
+export { iconMap as iconOptions } from "../../framework/icons/icon-map";
+export type { IconName } from "../../framework/icons/icon-map";

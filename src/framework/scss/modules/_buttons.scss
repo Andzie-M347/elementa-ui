@@ -24,12 +24,11 @@ $button-sizes: (
   .#{$prefix}-btn {
     @include flex-center;
     font-weight: var(--#{$prefix}-font-weight-bold, 700);
-
-    border: none;
-    // border-radius: var(--#{$prefix}-radius-md);
     line-height: 1.25;
     white-space: nowrap;
     // width: var(--#{$prefix}-w-auto);
+    // border: none;
+    // border-radius: var(--#{$prefix}-radius-md);
     transition: background-color 0.2s ease, color 0.2s ease,
       box-shadow 0.2s ease;
     cursor: pointer;
