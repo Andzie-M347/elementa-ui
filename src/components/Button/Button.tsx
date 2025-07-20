@@ -16,6 +16,7 @@ interface ButtonProps {
   fullWidth?: boolean;
   isLoading?: boolean;
   disabled?: boolean;
+  iconColor: "currentColor";
   icon?: ReactNode;
   iconPosition?: "left" | "right";
   children?: ReactNode;
@@ -99,13 +100,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ) : (
             <>
               {icon && iconPosition === "left" && (
-                <span className={clsx("inline-flex", { "mr-2": !isIconOnly })}>
+                <span
+                  className={clsx("inline-flex", {
+                    "e-ui-m-r_x-small": !isIconOnly,
+                  })}
+                >
                   {icon}
                 </span>
               )}
               {children}
               {icon && iconPosition === "right" && (
-                <span className={clsx("inline-flex", { "ml-2": !isIconOnly })}>
+                <span
+                  className={clsx("inline-flex", {
+                    "e-ui-m-l_x-small": !isIconOnly,
+                  })}
+                >
                   {icon}
                 </span>
               )}

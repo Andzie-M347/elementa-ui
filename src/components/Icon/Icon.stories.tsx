@@ -2,13 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Icon } from "../../framework/icons";
 import { iconMap, type IconName } from "../../framework/icons/icon-map";
 
-// Dynamically extract icon names
 const iconNames = Object.keys(iconMap) as IconName[];
 
 const meta: Meta<typeof Icon> = {
   title: "Components/Icon",
   component: Icon,
-  tags: ["autodocs"], // Optional: enables auto-docs in Storybook
+  tags: ["autodocs"],
   argTypes: {
     name: {
       control: { type: "select" },
@@ -21,6 +20,9 @@ const meta: Meta<typeof Icon> = {
     color: {
       control: { type: "color" },
     },
+    strokeWidth: {
+      control: { type: "number" },
+    },
     className: {
       control: { type: "text" },
     },
@@ -29,6 +31,7 @@ const meta: Meta<typeof Icon> = {
     name: "arrowLeft",
     size: "md",
     color: "currentColor",
+    strokeWidth: 1.5,
   },
 };
 
@@ -41,7 +44,7 @@ export const AllIcons: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
       {iconNames.map((name) => (
-        <div key={name} style={{ textAlign: "center" }}>
+        <div key={name} style={{ textAlign: "center", width: "5rem" }}>
           <Icon {...args} name={name} />
           <div style={{ fontSize: "0.75rem", marginTop: "0.25rem" }}>
             {name}
@@ -53,16 +56,22 @@ export const AllIcons: Story = {
   args: {
     size: "lg",
     color: "#64748b",
+    strokeWidth: 1.5,
   },
 };
 
 export const Sizes: Story = {
-  render: ({ name, color }) => (
+  render: ({ name, color, strokeWidth }) => (
     <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-      {["sm", "md", "lg", 32, 48].map((s, i) => (
-        <div key={i} style={{ textAlign: "center" }}>
-          <Icon name={name} size={s as any} color={color} />
-          <div style={{ fontSize: "0.75rem" }}>{s}</div>
+      {["sm", "md", "lg", 32, 48].map((size) => (
+        <div key={size.toString()} style={{ textAlign: "center" }}>
+          <Icon
+            name={name}
+            size={size as any}
+            color={color}
+            strokeWidth={strokeWidth}
+          />
+          <div style={{ fontSize: "0.75rem" }}>{size}</div>
         </div>
       ))}
     </div>
@@ -70,5 +79,6 @@ export const Sizes: Story = {
   args: {
     name: "star",
     color: "#2563eb",
+    strokeWidth: 2,
   },
 };

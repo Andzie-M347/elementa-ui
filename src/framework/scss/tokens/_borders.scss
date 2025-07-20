@@ -1,0 +1,31 @@
+@use "sass:map";
+
+$elementa-border-width-values: (
+  none: 0,
+  hairline: 1px,
+  thin: 2px,
+  medium: 4px,
+  thick: 6px,
+) !default;
+
+$elementa-border-style-values: (
+  solid: solid,
+  dashed: dashed,
+  dotted: dotted,
+  none: none,
+) !default;
+
+@mixin borders-module($prefix, $widths: (), $styles: (), $colors: ()) {
+  $merged-widths: map.merge($elementa-border-width-values, $widths);
+  $merged-styles: map.merge($elementa-border-style-values, $styles);
+
+  // Border widths
+  @each $name, $value in $merged-widths {
+    --#{$prefix}-border-width-#{$name}: #{$value};
+  }
+
+  // Border styles
+  @each $name, $value in $merged-styles {
+    --#{$prefix}-border-style-#{$name}: #{$value};
+  }
+}

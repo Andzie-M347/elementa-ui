@@ -1,36 +1,46 @@
 import { iconMap } from "./icon-map";
 import type { IconName } from "./icon-map";
 
-import "./icon.scss";
-
 type IconProps = {
   name: IconName;
   size?: "sm" | "md" | "lg" | number;
   color?: string;
+  strokeWidth?: number | string;
   className?: string;
 };
 
-// ! TBC to ElementaIcon
-export const Icon = ({ name, size = "md", className = "" }: IconProps) => {
+const sizeToRem = {
+  sm: "1rem",
+  md: "1.5rem",
+  lg: "2rem",
+} as const;
+
+export const Icon = ({
+  name,
+  size = "md",
+  color = "currentColor",
+  strokeWidth,
+  className = "",
+}: IconProps) => {
   const SvgIcon = iconMap[name];
+
   const resolvedSize =
-    size === "sm"
-      ? "1rem"
-      : size === "md"
-      ? "1.5rem"
-      : size === "lg"
-      ? "2rem"
-      : `${size}px`;
+    typeof size === "number" ? `${size}px` : sizeToRem[size] || size;
 
   if (!SvgIcon) {
-    console.warn(`Icon "${name}" not found`);
+    console.warn(`[Elementa UI] Icon "${name}" not found in iconMap.`);
     return null;
   }
 
   return (
     <SvgIcon
       className={`e-ui-icon ${className}`}
-      style={{ width: resolvedSize, height: resolvedSize, fill: "none" }}
+      style={{
+        width: resolvedSize,
+        height: resolvedSize,
+        stroke: color,
+        strokeWidth,
+      }}
       aria-hidden="true"
       focusable="false"
     />

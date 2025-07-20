@@ -5,6 +5,7 @@
 @use "./tokens/height" as height;
 @use "./tokens/typography" as typography;
 @use "./tokens/fonts" as fonts;
+@use "./tokens/borders" as borders;
 
 @use "./hooks/colour-hooks" as color_hooks;
 @use "./hooks/spacing-hooks" as spacing_hooks;
@@ -12,6 +13,7 @@
 @use "./hooks/width-hooks" as width_hooks;
 @use "./hooks/height-hooks" as height_hooks;
 @use "./hooks/typography-hooks" as typography_hooks;
+@use "./hooks/borders-hooks" as borders_hooks;
 
 @use "./base-reset.scss" as reset;
 
@@ -34,8 +36,9 @@
       //   success: #00cc99,
       // )
     );
-    @include typography.typography-module($prefix: $prefix);
-    @include fonts.font-module($prefix: $prefix);
+    @include typography.typography-module($prefix);
+    @include fonts.font-module($prefix);
+    @include borders.borders-module($prefix);
   }
 }
 
@@ -49,4 +52,5 @@
   @include height_hooks.height-styling-hooks($prefix);
   @include radius_hooks.radius-styling-hooks($prefix);
   @include typography_hooks.typography-styling-hooks($prefix);
+  @include borders_hooks.borders-styling-hooks($prefix);
 }

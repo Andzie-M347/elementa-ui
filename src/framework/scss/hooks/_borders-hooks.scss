@@ -1,0 +1,73 @@
+@use "sass:map";
+@use "sass:string";
+
+@use "./colour-hooks" as *;
+
+// Default border width values
+$elementa-border-width-values: (
+  none: 0,
+  hairline: 1px,
+  thin: 2px,
+  medium: 4px,
+  thick: 6px,
+) !default;
+
+// Default border style values
+$elementa-border-style-values: (
+  solid: solid,
+  dashed: dashed,
+  dotted: dotted,
+  none: none,
+) !default;
+
+@mixin borders-styling-hooks($prefix, $widths: (), $styles: ()) {
+  $merged-widths: map.merge($elementa-border-width-values, $widths);
+  $merged-styles: map.merge($elementa-border-style-values, $styles);
+
+  // Utility classes for border widths
+  @each $name, $value in $merged-widths {
+    .#{$prefix}-border-width-#{$name} {
+      --#{$prefix}-border-width-#{$name}: #{$value};
+      border-width: var(--#{$prefix}-border-width-#{$name});
+    }
+  }
+
+  // Utility classes for border styles
+  @each $name, $value in $merged-styles {
+    .#{$prefix}-border-style-#{$name} {
+      --#{$prefix}-border-style-#{$name}: #{$value};
+      border-style: var(--#{$prefix}-border-style-#{$name});
+    }
+  }
+
+  // Utility classes for border colors using existing colorList
+  @each $color, $var in $colorList {
+    @if (
+      string.index($var, "-hover") or
+        string.index($var, "-10") or
+        string.index($var, "-50")
+    ) {
+      .#{$prefix}-border-color-#{$color}:hover {
+        border-color: var(--#{$prefix}-#{$var});
+      }
+    } @else {
+      .#{$prefix}-border-color-#{$color} {
+        border-color: var(--#{$prefix}-#{$var});
+      }
+    }
+
+    // Dark mode variants for border colors
+    @if not(
+      string.index($var, "-hover") or
+        string.index($var, "-10") or
+        string.index($var, "-50")
+    )
+    {
+      .#{$prefix}-dark-border-color-#{$color} {
+        @media (prefers-color-scheme: dark) {
+          border-color: var(--#{$prefix}-#{$var}-dark);
+        }
+      }
+    }
+  }
+}
