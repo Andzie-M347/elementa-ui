@@ -2,10 +2,14 @@
 
 $colorList: (
   "primary": "primary-color",
+  "accent-lavender": "accent-lavender-color",
+  "accent-rose": "accent-rose-color",
   "primary-hover": "primary-color-hover",
   "primary-10": "primary-color-10",
   "primary-50": "primary-color-50",
   "secondary": "secondary-color",
+  "pale-grey-75-color": "pale-grey-75-color",
+  "neutral-white-25-color": "neutral-white-25-color",
   "secondary-hover": "secondary-color-hover",
   "secondary-10": "secondary-color-10",
   "secondary-50": "secondary-color-50",
@@ -60,7 +64,7 @@ $colorList: (
   "neutral-white": "neutral-white-color",
   "neutral-white-hover": "neutral-white-color-hover",
   "neutral-white-10": "neutral-white-color-10",
-  "neutral-white-50": "neutral-white-color-50",
+  "neutral-white-50": "neutral-white-50-color",
   "neutral-white-75": "neutral-white-75-color",
   "neutral-white-75-hover": "neutral-white-75-color-hover",
   "neutral-white-75-10": "neutral-white-75-color-10",
@@ -74,43 +78,21 @@ $colorList: (
     $property: background-color;
   } @else if ($type == "border") {
     $property: border-color;
-  } @else if ($type == "fill") {
-    $property: fill;
-  } @else if ($type == "stroke") {
-    $property: stroke;
-  } @else if ($type == "accent") {
-    $property: accent-color;
-  } @else if ($type == "caret") {
-    $property: caret-color;
-  } @else if ($type == "decoration") {
-    $property: text-decoration-color;
-  } @else if ($type == "shadow") {
-    $property: --tw-shadow-color;
   }
 
   @each $color, $var in $colorList {
-    // Base and opacity classes
-    @if (
-      string.index($var, "-hover") or
-        string.index($var, "-10") or
-        string.index($var, "-50")
-    ) {
+    // Apply hover style only for `-hover` tokens
+    @if string.index($var, "-hover") {
       .#{$prefix}-#{$type}_#{$color}:hover {
         #{$property}: var(--#{$prefix}-#{$var});
       }
     } @else {
+      // Apply base style for everything else
       .#{$prefix}-#{$type}_#{$color} {
         #{$property}: var(--#{$prefix}-#{$var});
       }
-    }
 
-    // Dark mode variants
-    @if not(
-      string.index($var, "-hover") or
-        string.index($var, "-10") or
-        string.index($var, "-50")
-    )
-    {
+      // Optional: Dark mode support for base styles
       .#{$prefix}-dark-#{$type}_#{$color} {
         @media (prefers-color-scheme: dark) {
           #{$property}: var(--#{$prefix}-#{$var}-dark);
@@ -118,4 +100,34 @@ $colorList: (
       }
     }
   }
+
+  // @each $color, $var in $colorList {
+  //   @if (
+  //     string.index($var, "-hover") or
+  //       string.index($var, "-10") or
+  //       string.index($var, "-50")
+  //   ) {
+  //     .#{$prefix}-#{$type}_#{$color}:hover {
+  //       #{$property}: var(--#{$prefix}-#{$var});
+  //     }
+  //   } @else {
+  //     .#{$prefix}-#{$type}_#{$color} {
+  //       #{$property}: var(--#{$prefix}-#{$var});
+  //     }
+  //   }
+
+  //   // Dark mode variants
+  //   @if not(
+  //     string.index($var, "-hover") or
+  //       string.index($var, "-10") or
+  //       string.index($var, "-50")
+  //   )
+  //   {
+  //     .#{$prefix}-dark-#{$type}_#{$color} {
+  //       @media (prefers-color-scheme: dark) {
+  //         #{$property}: var(--#{$prefix}-#{$var}-dark);
+  //       }
+  //     }
+  //   }
+  // }
 }
