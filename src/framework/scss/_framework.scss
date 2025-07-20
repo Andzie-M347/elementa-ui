@@ -1,0 +1,52 @@
+@use "./tokens/colors" as colors;
+@use "./tokens/spacing" as spacing;
+@use "./tokens/radius" as radius;
+@use "./tokens/width" as width;
+@use "./tokens/height" as height;
+@use "./tokens/typography" as typography;
+@use "./tokens/fonts" as fonts;
+
+@use "./hooks/colour-hooks" as color_hooks;
+@use "./hooks/spacing-hooks" as spacing_hooks;
+@use "./hooks/radius-hooks" as radius_hooks;
+@use "./hooks/width-hooks" as width_hooks;
+@use "./hooks/height-hooks" as height_hooks;
+@use "./hooks/typography-hooks" as typography_hooks;
+
+@use "./base-reset.scss" as reset;
+
+@use "./utils/mixins" as *;
+
+@mixin elementa-framework-root-bundle($version, $prefix, $overrides: ()) {
+  @include reset.base-reset($prefix, $overrides);
+
+  @at-root :root {
+    @include generate-css-vars(spacing.get-spacing-vars($prefix));
+    @include generate-css-vars(radius.get-radius-vars($prefix));
+    @include generate-css-vars(width.get-width-vars($prefix));
+    @include generate-css-vars(height.get-height-vars($prefix));
+    @include colors.colour-module(
+      $version: "default",
+      $prefix: $prefix,
+      // OVERRIDES EXAMPLE
+      // $overrides: (
+      //   primary: #0057ff,
+      //   success: #00cc99,
+      // )
+    );
+    @include typography.typography-module($prefix: $prefix);
+    @include fonts.font-module($prefix: $prefix);
+  }
+}
+
+@mixin elementa-framework-style-hook-bundle($version, $prefix) {
+  @include color_hooks.color-styling-hooks("color", $prefix);
+  @include color_hooks.color-styling-hooks("background", $prefix);
+  @include color_hooks.color-styling-hooks("border", $prefix);
+
+  @include spacing_hooks.spacing-styling-hooks($prefix);
+  @include width_hooks.width-styling-hooks($prefix);
+  @include height_hooks.height-styling-hooks($prefix);
+  @include radius_hooks.radius-styling-hooks($prefix);
+  @include typography_hooks.typography-styling-hooks($prefix);
+}

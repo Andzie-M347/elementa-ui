@@ -1,0 +1,41 @@
+@use "sass:map";
+
+$font-weight-hooks: ("regular", "medium", "semibold", "bold") !default;
+
+$font-size-hooks: (10, 12, 14, 16, 18, 20, 24, 28, 32) !default;
+
+/// Typography token generator
+/// @param {String} $prefix
+/// @param {Map} $weight-overrides
+/// @param {Map} $size-overrides
+@mixin typography-module($prefix, $weight-overrides: (), $size-overrides: ()) {
+  $default-weights: (
+    regular: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700,
+  );
+
+  $default-sizes: (
+    10: 0.625rem,
+    12: 0.75rem,
+    14: 0.875rem,
+    16: 1rem,
+    18: 1.125rem,
+    20: 1.25rem,
+    24: 1.5rem,
+    28: 1.75rem,
+    32: 2rem,
+  );
+
+  $weights: map.merge($default-weights, $weight-overrides);
+  $sizes: map.merge($default-sizes, $size-overrides);
+
+  @each $name, $value in $weights {
+    --#{$prefix}-font-weight-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $sizes {
+    --#{$prefix}-font-size-#{$name}: #{$value};
+  }
+}

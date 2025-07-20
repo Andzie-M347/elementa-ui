@@ -1,0 +1,63 @@
+@use "sass:map";
+@use "../tokens/spacing" as spacing;
+
+// === DIRECTION MAP ===
+$direction-shorthands: (
+  "x": (
+    "left",
+    "right",
+  ),
+  "y": (
+    "top",
+    "bottom",
+  ),
+  "t": (
+    "top",
+  ),
+  "r": (
+    "right",
+  ),
+  "b": (
+    "bottom",
+  ),
+  "l": (
+    "left",
+  ),
+  "all": (
+    "",
+  ),
+);
+
+@mixin spacing-size-compile($prefix, $dir, $spacing-map, $isPadding: true) {
+  @each $size, $val in $spacing-map {
+    $class: #{$prefix}-#{if($isPadding, "p", "m")}-#{$dir}_#{$size};
+    $prop: if($isPadding, padding, margin);
+    $token: var(--#{$prefix}-space-#{$size});
+
+    .#{$class} {
+      @if $dir == "all" {
+        #{$prop}: $token;
+      } @else {
+        $sides: map.get($direction-shorthands, $dir);
+        @each $side in $sides {
+          #{$prop}-#{$side}: $token;
+        }
+      }
+    }
+  }
+}
+
+@mixin spacing-styling-hooks($prefix) {
+  $dirs: ("x", "y", "t", "r", "b", "l", "all");
+
+  @each $isPadding in (true, false) {
+    @each $dir in $dirs {
+      @include spacing-size-compile(
+        $prefix,
+        $dir,
+        spacing.$spacing-values,
+        $isPadding
+      );
+    }
+  }
+}

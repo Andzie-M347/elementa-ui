@@ -1,0 +1,135 @@
+@use "sass:color";
+@use "sass:map";
+@use "sass:meta";
+
+$elementa-color-values: (
+  // primary: #0a3d62,
+  // secondary: #6d2f8a,
+  // success: #d4f0b8,
+  // warning: #ffedd5,
+  // error: #ffd7db,
+  // info: #d1e7ff,
+  // neutral-black: #0a101f,
+  // primary-grey: #1a2233,
+  // medium-grey: #4a5063,
+  // light-grey: #959cb3,
+  // pale-grey: #b8bccb,
+  // pale-grey-200: #ccd0db,
+  // pale-grey-100: #e8eaef,
+  // pale-grey-75: #f5f6f8,
+  // neutral-white: #ffffff,
+  // neutral-white-75: #fafafa,
+  // NEW COLOR PALLETTE
+  // Core functional colors
+  primary: #306bff,
+  secondary: #bb80ff,
+  success: #78c552,
+  warning: #ffb580,
+  error: #ffd7db,
+  info: #33bfff,
+
+  // Core neutrals
+  neutral-black: #1e293b,
+  primary-grey: #292d32,
+  medium-grey: #94a3b8,
+  light-grey: #e2e8f0,
+  pale-grey: #e4ccff,
+  pale-grey-200: #eef2f6,
+  pale-grey-100: #f8fafc,
+  pale-grey-75: #f0faff,
+  pale-grey-50: #ccefff,
+
+  // Whites & off-whites
+  neutral-white: #ffffff,
+  neutral-white-75: #fbfbfb,
+  neutral-white-50: #f3faf0,
+  neutral-white-25: #fff6f0,
+
+  // Accent pastels
+  accent-lavender: #f7f0ff,
+  accent-indigo: #cddbfe,
+  accent-blush: #ffe1cc,
+  accent-mint: #d2ecc6,
+  accent-rose: #f0f4ff,
+  accent-sky: #eaf0ff,
+  accent-cool-grey: #e2e7ee,
+  accent-cool-grey-light: #e6eaf0,
+
+  // Brighter tones
+  highlight-cyan: #33bfff,
+  highlight-sky: #ccefff,
+  highlight-light: #f8fafc
+) !default;
+
+@mixin colour-module($version, $prefix, $overrides: ()) {
+  $merged-colors: map.merge($elementa-color-values, $overrides);
+
+  $special-cases: (
+    neutral-black:
+      if($version == "dark", #1c2526, map.get($merged-colors, neutral-black)),
+    neutral-white:
+      if($version == "dark", #d1d5db, map.get($merged-colors, neutral-white)),
+    neutral-white-75:
+      if($version == "dark", #e5e7eb, map.get($merged-colors, neutral-white-75)),
+  );
+
+  @each $color-name, $color-value in $merged-colors {
+    $adjusted-color: if(
+      map.has-key($special-cases, $color-name),
+      map.get($special-cases, $color-name),
+      if(
+        $version ==
+          "dark" and
+          $color-name !=
+          "neutral-black" and
+          $color-name !=
+          "neutral-white" and
+          $color-name !=
+          "neutral-white-75",
+        color.adjust($color-value, $lightness: -10%),
+        $color-value
+      )
+    );
+
+    // Base color
+    --#{$prefix}-#{$color-name}-color: #{$adjusted-color};
+
+    // Hover variant
+    --#{$prefix}-#{$color-name}-color-hover: #{if(
+        $color-name == "neutral-black",
+        #262f3d,
+        if(
+          $color-name == "neutral-white",
+          #e5e5e5,
+          if(
+            $color-name == "neutral-white-75",
+            #e0e0e0,
+            if(
+              $color-name == "pale-grey-75",
+              color.adjust($adjusted-color, $lightness: 5%),
+              color.adjust($adjusted-color, $lightness: 10%)
+            )
+          )
+        )
+      )};
+
+    // Opacity variants
+    --#{$prefix}-#{$color-name}-color-10: #{rgba($adjusted-color, 0.1)};
+    --#{$prefix}-#{$color-name}-color-50: #{rgba($adjusted-color, 0.5)};
+
+    // Dark variant
+    --#{$prefix}-#{$color-name}-color-dark: #{if(
+        $color-name == "neutral-black",
+        #1c2526,
+        if(
+          $color-name == "neutral-white",
+          #d1d5db,
+          if(
+            $color-name == "neutral-white-75",
+            #e5e7eb,
+            color.adjust($adjusted-color, $lightness: -10%)
+          )
+        )
+      )};
+  }
+}

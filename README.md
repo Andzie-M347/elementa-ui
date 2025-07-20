@@ -25,9 +25,15 @@ Currently used in:
 
 ```bash
 # Once published to npm or GitHub Packages:
+<<<<<<< HEAD
 npm install @Andzie-M347/elementa-ui
 # or
 yarn add @Andzie-M347/elementa-ui
+=======
+npm install @Andzie-M347/elementa
+# or
+yarn add @Andzie-M347/elementa
+>>>>>>> feature/badges
 ````
 
 ---
@@ -35,7 +41,11 @@ yarn add @Andzie-M347/elementa-ui
 ## 🛠 Usage
 
 ```tsx
+<<<<<<< HEAD
 import { Button, Card, Modal } from '@Andzie-M347/elementa-ui';
+=======
+import { Button, Card, Modal } from '@Andzie-M347/elementa';
+>>>>>>> feature/badges
 
 <Button variant="primary">Click me</Button>
 ```
@@ -46,7 +56,11 @@ import { Button, Card, Modal } from '@Andzie-M347/elementa-ui';
 
 ```bash
 # Clone the repo
+<<<<<<< HEAD
 git clone https://github.com/Andzie-M347/elementa-ui.git
+=======
+git clone https://github.com/Andzie-M347/elementa.git
+>>>>>>> feature/badges
 cd elementa
 
 # Install dependencies
@@ -85,4 +99,8 @@ npm run storybook
 
 ---
 
+<<<<<<< HEAD
 Built and maintained by **Andzisi**.
+=======
+Built and maintained by **Andzisi**.
+>>>>>>> feature/badges

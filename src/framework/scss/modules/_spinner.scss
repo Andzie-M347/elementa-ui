@@ -1,0 +1,52 @@
+@use "../tokens/colors" as *;
+@use "../tokens/spacing" as *;
+@use "../utils/mixins" as *;
+@use "sass:map";
+
+$prefix: "e-ui";
+
+$spinner-sizes: (
+  sm: (
+    size: var(--#{$prefix}-space-large, 1.5rem),
+    border-width: 2px,
+  ),
+  md: (
+    size: var(--#{$prefix}-space-xxx-large),
+    border-width: 4px,
+  ),
+  lg: (
+    size: 64px,
+    border-width: 5px,
+  ),
+) !default;
+
+@mixin spinner-classes($prefix) {
+  .#{$prefix}-spinner {
+    display: inline-block;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: var(
+      --#{$prefix}-spinner-color,
+      var(--#{$prefix}-primary-color)
+    );
+    border-bottom-color: transparent;
+    animation: #{$prefix}-spin var(--#{$prefix}-spinner-speed, 1s) linear infinite;
+    box-sizing: border-box;
+  }
+
+  @each $size, $tokens in $spinner-sizes {
+    .#{$prefix}-spinner--#{$size} {
+      width: map.get($tokens, size);
+      height: map.get($tokens, size);
+      border-width: map.get($tokens, border-width);
+    }
+  }
+}
+
+// @include spinner-classes("e-ui");
+
+@keyframes e-ui-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

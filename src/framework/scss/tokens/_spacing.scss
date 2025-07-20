@@ -1,0 +1,30 @@
+@use "sass:map";
+
+$spacing-values: (
+  "xxx-small": 0.125rem,
+  "xx-small": 0.25rem,
+  "x-small": 0.5rem,
+  "small": 0.75rem,
+  "medium": 1rem,
+  "large": 1.5rem,
+  "x-large": 2rem,
+  "xx-large": 2.5rem,
+  "xxx-large": 3rem,
+  "xxxx-large": 3.5rem,
+) !default;
+
+@function get-spacing-vars($prefix) {
+  $output: ();
+
+  @each $size, $value in $spacing-values {
+    $key: "--#{$prefix}-space-#{$size}";
+    $output: map.merge(
+      $output,
+      (
+        $key: $value,
+      )
+    );
+  }
+
+  @return $output;
+}

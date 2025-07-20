@@ -1,0 +1,46 @@
+@use "sass:map";
+
+$height-values: (
+  "auto": auto,
+  "full": 100%,
+  "screen": 100vh,
+  "fit": fit-content,
+) !default;
+
+$height-scale-values: (
+  24: 1.5rem,
+  32: 2rem,
+  40: 2.5rem,
+  48: 3rem,
+  64: 4rem,
+  80: 5rem,
+  96: 6rem,
+) !default;
+
+@function get-height-vars($prefix) {
+  $output: ();
+
+  // Named height values
+  @each $key, $value in $height-values {
+    $css-var: "--#{$prefix}-h-#{$key}";
+    $output: map.merge(
+      $output,
+      (
+        $css-var: $value,
+      )
+    );
+  }
+
+  // Number-based height scale
+  @each $key, $value in $height-scale-values {
+    $css-var: "--#{$prefix}-h-#{$key}";
+    $output: map.merge(
+      $output,
+      (
+        $css-var: $value,
+      )
+    );
+  }
+
+  @return $output;
+}

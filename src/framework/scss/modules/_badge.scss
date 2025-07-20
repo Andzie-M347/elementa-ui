@@ -1,0 +1,26 @@
+@use "../tokens/colors" as *;
+@use "../tokens/spacing" as *;
+@use "../utils/mixins" as *;
+@use "sass:map";
+$button-sizes: (
+  sm: (
+    font-size: "font-size-12",
+    height: "h-24",
+    padding-x: "space-small",
+  ),
+) !default;
+
+@mixin badge-classes($prefix) {
+  .#{$prefix}-badge {
+    @include flex-center;
+    font-weight: var(--#{$prefix}-font-weight-semibold, 600);
+    width: var(--#{$prefix}-w-fit);
+  }
+
+  @each $size, $tokens in $button-sizes {
+    .#{$prefix}-badge--#{$size} {
+      font-size: var(--#{$prefix}-#{map.get($tokens, font-size)});
+      height: var(--#{$prefix}-#{map.get($tokens, height)});
+    }
+  }
+}

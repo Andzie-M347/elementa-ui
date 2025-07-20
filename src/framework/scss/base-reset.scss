@@ -1,0 +1,229 @@
+@use "sass:map";
+
+@mixin base-reset($prefix, $config: ()) {
+  // Default configuration with customizable variables
+  $defaults: (
+    "font-family": "Open Sans, sans-serif",
+    "font-size": 16px,
+    "line-height": 1.5,
+    "text-color": #0a101f,
+    "background-color": #ffffff,
+    "focus-outline": 2px solid #0052cc,
+    "scroll-behavior": smooth,
+  );
+  $settings: map.merge($defaults, $config);
+
+  // Universal reset with performance optimization
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    // Prevent font size inflation on mobile
+    text-size-adjust: 100%;
+    // Improve performance by reducing layout thrashing
+    will-change: auto;
+  }
+
+  // HTML reset with enhanced accessibility and smooth scrolling
+  html {
+    font-family: var(
+      --#{$prefix}-font-family,
+      #{map.get($settings, "font-family")}
+    );
+    font-size: var(--#{$prefix}-font-size, #{map.get($settings, "font-size")});
+    line-height: var(
+      --#{$prefix}-line-height,
+      #{map.get($settings, "line-height")}
+    );
+    color: var(--#{$prefix}-text-color, #{map.get($settings, "text-color")});
+    background-color: var(
+      --#{$prefix}-background-color,
+      #{map.get($settings, "background-color")}
+    );
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    // Enable smooth scrolling
+    scroll-behavior: var(
+      --#{$prefix}-scroll-behavior,
+      #{map.get($settings, "scroll-behavior")}
+    );
+    // Improve text rendering
+    text-rendering: optimizeLegibility;
+    // Prevent horizontal overflow
+    overflow-x: hidden;
+  }
+
+  // Body inherits and adds accessibility
+  body {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    background-color: inherit;
+    // Prevent text selection on double-click
+    user-select: none;
+    // Minimum accessible font size
+    min-height: 100vh;
+    // Optimize for reduced motion
+    @media (prefers-reduced-motion: reduce) {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  // Enhanced form elements reset
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+    // Remove default appearance
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    // Improve accessibility
+    &:focus {
+      outline: var(
+        --#{$prefix}-focus-outline,
+        #{map.get($settings, "focus-outline")}
+      );
+      outline-offset: 2px;
+    }
+    // Remove default browser styling
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+  }
+
+  // Enhanced link reset with accessibility
+  a {
+    color: inherit;
+    text-decoration: none;
+    // Improve accessibility for focus states
+    &:focus {
+      outline: var(
+        --#{$prefix}-focus-outline,
+        #{map.get($settings, "focus-outline")}
+      );
+      outline-offset: 2px;
+    }
+    // Remove tap highlight on mobile
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  // List reset with additional context
+  ul,
+  ol {
+    list-style: none;
+    // Ensure proper spacing for nested lists
+    padding-left: 0;
+  }
+
+  // Enhanced media resets
+  img,
+  video,
+  picture,
+  svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    image-rendering: optimizeQuality;
+  }
+
+  // Additional resets for modern elements
+  figure,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
+
+  // Reset tables
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  // Reset headings
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+  // Form accessibility enhancements
+  [type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+  }
+
+  // Remove default button styling
+  button {
+    cursor: pointer;
+    background-color: transparent;
+    // Ensure buttons are clickable
+    touch-action: manipulation;
+  }
+
+  // Improve accessibility for hidden elements
+  [hidden] {
+    display: none !important;
+  }
+
+  // Reset fieldsets
+  fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  // Ensure proper rendering of details/summary
+  details {
+    display: block;
+  }
+
+  summary {
+    display: list-item;
+    cursor: pointer;
+  }
+
+  // Prevent text overflow
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
+
+  // Improve performance for animations
+  [data-animate] {
+    will-change: transform, opacity;
+  }
+
+  // High contrast mode support
+  @media (forced-colors: active) {
+    :focus {
+      outline: 2px solid Highlight !important;
+    }
+    a,
+    button {
+      forced-color-adjust: none;
+    }
+  }
+}

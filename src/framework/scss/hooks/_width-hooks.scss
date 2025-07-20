@@ -1,0 +1,15 @@
+// hooks/_width-hooks.scss
+@mixin width-styling-hooks($prefix) {
+  .#{$prefix}-w-full {
+    width: 100%;
+  }
+  .#{$prefix}-w-auto {
+    width: auto;
+  }
+  .#{$prefix}-w-fit {
+    width: fit-content;
+  }
+  .#{$prefix}-w-screen {
+    width: 100vw;
+  }
+}

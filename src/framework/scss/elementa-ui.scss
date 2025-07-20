@@ -1,0 +1,13 @@
+@use "./framework" as framework;
+@use "./components" as component;
+
+$prefix: "e-ui";
+$version: "default";
+
+@include framework.elementa-framework-root-bundle($version, $prefix);
+
+// Inject styling hooks like utility classes (.e-ui-color_primary, etc.)
+@include framework.elementa-framework-style-hook-bundle($version, $prefix);
+
+// Components
+@include component.elementa-button-component($version, $prefix);
