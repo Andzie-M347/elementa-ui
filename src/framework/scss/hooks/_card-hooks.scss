@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "sass:string";
+@use "../modules/skeleton" as *;
+
+$card-max-widths: (
+  xs: 15.5625rem,
+  sm: 20rem,
+) !default;
+
+@mixin card-styling-hooks($prefix) {
+  .#{$prefix}-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Max-width utilities
+  @each $size, $value in $card-max-widths {
+    .#{$prefix}-card-#{$size} {
+      max-width: #{$value};
+    }
+  }
+}

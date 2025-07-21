@@ -8,14 +8,13 @@ export interface CardProps extends HTMLAttributes<HTMLElement> {
   as?: ElementType; //(div, section, article...)
   variant?: CardVariant;
   padding?: string;
-  radius?: string;
   prefix?: string;
   styleOverrides?: {
     variantStyles?: Partial<Record<CardVariant, string>>;
     padding?: string;
     radius?: string;
   };
-
+  size?: "xs" | "sm";
   density?: CardDensity; // <-- for compact/comfortable spacing
   loading?: boolean; // <-- flag to show skeleton loader
   skeleton?: ReactNode; // <-- optional custom skeleton override

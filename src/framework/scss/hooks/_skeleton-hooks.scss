@@ -1,0 +1,35 @@
+@use "sass:map";
+@use "sass:string";
+@use "../modules/skeleton" as *;
+
+$skeleton-sizes: (
+  xs: var(--e-ui-space-x-small),
+  sm: var(--e-ui-space-small),
+  md: var(--e-ui-space-medium),
+  lg: var(--e-ui-space-large),
+  xl: var(--e-ui-space-x-large),
+) !default;
+
+$skeleton-radii: (
+  rounded: var(--e-ui-radius-lg),
+  circle: var(--e-ui-radius-full),
+) !default;
+
+@mixin skeleton-styling-hooks($prefix) {
+  .#{$prefix}-skeleton-ldr {
+    @include skeleton-base;
+  }
+  // Height utilities
+  @each $size, $value in $skeleton-sizes {
+    .#{$prefix}-skeleton-ldr-#{$size} {
+      height: #{$value};
+    }
+  }
+
+  // Border radius utilities
+  @each $radius, $value in $skeleton-radii {
+    .#{$prefix}-skeleton-ldr-#{$radius} {
+      border-radius: #{$value};
+    }
+  }
+}

@@ -14,6 +14,8 @@
 @use "./hooks/height-hooks" as height_hooks;
 @use "./hooks/typography-hooks" as typography_hooks;
 @use "./hooks/borders-hooks" as borders_hooks;
+@use "./hooks/skeleton-hooks" as skeleton_hooks;
+@use "./hooks/card-hooks" as card_hooks;
 
 @use "./base-reset.scss" as reset;
 
@@ -46,11 +48,12 @@
   @include color_hooks.color-styling-hooks("color", $prefix);
   @include color_hooks.color-styling-hooks("background", $prefix);
   @include color_hooks.color-styling-hooks("border", $prefix);
-
+  @include skeleton_hooks.skeleton-styling-hooks($prefix);
   @include spacing_hooks.spacing-styling-hooks($prefix);
   @include width_hooks.width-styling-hooks($prefix);
   @include height_hooks.height-styling-hooks($prefix);
   @include radius_hooks.radius-styling-hooks($prefix);
   @include typography_hooks.typography-styling-hooks($prefix);
   @include borders_hooks.borders-styling-hooks($prefix);
+  @include card_hooks.card-styling-hooks($prefix);
 }

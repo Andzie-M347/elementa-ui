@@ -2,33 +2,14 @@
 @use "sass:map";
 @use "sass:meta";
 
+// Define base color values
 $elementa-color-values: (
-  // primary: #0a3d62,
-  // secondary: #6d2f8a,
-  // success: #d4f0b8,
-  // warning: #ffedd5,
-  // error: #ffd7db,
-  // info: #d1e7ff,
-  // neutral-black: #0a101f,
-  // primary-grey: #1a2233,
-  // medium-grey: #4a5063,
-  // light-grey: #959cb3,
-  // pale-grey: #b8bccb,
-  // pale-grey-200: #ccd0db,
-  // pale-grey-100: #e8eaef,
-  // pale-grey-75: #f5f6f8,
-  // neutral-white: #ffffff,
-  // neutral-white-75: #fafafa,
-  // NEW COLOR PALLETTE
-  // Core functional colors
   primary: #306bff,
   secondary: #bb80ff,
   success: #78c552,
   warning: #ffb580,
   error: #ffd7db,
   info: #33bfff,
-
-  // Core neutrals
   neutral-black: #1e293b,
   primary-grey: #292d32,
   medium-grey: #94a3b8,
@@ -38,14 +19,10 @@ $elementa-color-values: (
   pale-grey-100: #f8fafc,
   pale-grey-75: #f0faff,
   pale-grey-50: #ccefff,
-
-  // Whites & off-whites
   neutral-white: #ffffff,
   neutral-white-75: #fbfbfb,
   neutral-white-50: #f3faf0,
   neutral-white-25: #fff6f0,
-
-  // Accent pastels
   accent-lavender: #f7f0ff,
   accent-indigo: #cddbfe,
   accent-blush: #ffe1cc,
@@ -54,15 +31,48 @@ $elementa-color-values: (
   accent-sky: #eaf0ff,
   accent-cool-grey: #e2e7ee,
   accent-cool-grey-light: #e6eaf0,
-
-  // Brighter tones
   highlight-cyan: #33bfff,
   highlight-sky: #ccefff,
-  highlight-light: #f8fafc
+  highlight-light: #f8fafc,
+) !default;
+
+// Define explicit hover colors
+$elementa-hover-colors: (
+  primary: #2557d6,
+  secondary: #a66be6,
+  success: #62a042,
+  warning: #e69b66,
+  error: #e6bfc3,
+  info: #2aa6e6,
+  neutral-black: #262f3d,
+  primary-grey: #3b4149,
+  medium-grey: #7b8a9e,
+  light-grey: #cbd3de,
+  pale-grey: #ccb3e6,
+  pale-grey-200: #d6dbe2,
+  pale-grey-100: #dfe4eb,
+  pale-grey-75: #d8e2f0,
+  pale-grey-50: #b3d6e6,
+  neutral-white: #e5e5e5,
+  neutral-white-75: #e0e0e0,
+  neutral-white-50: #dbe2d8,
+  neutral-white-25: #e6ddd8,
+  accent-lavender: #ded6e6,
+  accent-indigo: #b4c2e5,
+  accent-blush: #e6c8b3,
+  accent-mint: #b9d3ad,
+  accent-rose: #d7dbe6,
+  accent-sky: #d1d7e6,
+  accent-cool-grey: #c9ced5,
+  accent-cool-grey-light: #cdd1d7,
+  highlight-cyan: #2aa6e6,
+  highlight-sky: #b3d6e6,
+  highlight-light: #dfe4eb,
 ) !default;
 
 @mixin colour-module($version, $prefix, $overrides: ()) {
   $merged-colors: map.merge($elementa-color-values, $overrides);
+  $merged-hover-colors: map.merge($elementa-hover-colors, $overrides);
 
   $special-cases: (
     neutral-black:
@@ -94,42 +104,29 @@ $elementa-color-values: (
     // Base color
     --#{$prefix}-#{$color-name}-color: #{$adjusted-color};
 
-    // Hover variant
-    --#{$prefix}-#{$color-name}-color-hover: #{if(
-        $color-name == "neutral-black",
-        #262f3d,
-        if(
-          $color-name == "neutral-white",
-          #e5e5e5,
-          if(
-            $color-name == "neutral-white-75",
-            #e0e0e0,
-            if(
-              $color-name == "pale-grey-75",
-              color.adjust($adjusted-color, $lightness: 5%),
-              color.adjust($adjusted-color, $lightness: 10%)
-            )
-          )
-        )
+    // Hover variant (use explicit hover color from map)
+    --#{$prefix}-#{$color-name}-color-hover: #{map.get(
+        $merged-hover-colors,
+        $color-name
       )};
 
-    // Opacity variants
-    --#{$prefix}-#{$color-name}-color-10: #{rgba($adjusted-color, 0.1)};
-    --#{$prefix}-#{$color-name}-color-50: #{rgba($adjusted-color, 0.5)};
+    // // Opacity variants
+    // --#{$prefix}-#{$color-name}-color-10: #{rgba($adjusted-color, 0.1)};
+    // --#{$prefix}-#{$color-name}-color-50: #{rgba($adjusted-color, 0.5)};
 
-    // Dark variant
-    --#{$prefix}-#{$color-name}-color-dark: #{if(
-        $color-name == "neutral-black",
-        #1c2526,
-        if(
-          $color-name == "neutral-white",
-          #d1d5db,
-          if(
-            $color-name == "neutral-white-75",
-            #e5e7eb,
-            color.adjust($adjusted-color, $lightness: -10%)
-          )
-        )
-      )};
+    // // Dark variant
+    // --#{$prefix}-#{$color-name}-color-dark: #{if(
+    //     $color-name == "neutral-black",
+    //     #1c2526,
+    //     if(
+    //       $color-name == "neutral-white",
+    //       #d1d5db,
+    //       if(
+    //         $color-name == "neutral-white-75",
+    //         #e5e7eb,
+    //         color.adjust($adjusted-color, $lightness: -10%)
+    //       )
+    //     )
+    //   )};
   }
 }

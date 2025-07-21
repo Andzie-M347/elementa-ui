@@ -1,5 +1,4 @@
-import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Card } from "./Card";
 
@@ -16,11 +15,15 @@ const meta: Meta<typeof Card> = {
       control: "select",
       options: ["default", "compact"],
     },
+    size: {
+      control: "radio",
+      options: ["xs", "sm"],
+    },
     isLoading: {
       control: "boolean",
     },
-    padding: { control: "text" },
-    radius: { control: "text" },
+    // padding: { control: "text" },
+    // radius: { control: "text" },
     prefix: { control: "text" },
     as: { control: "text" },
   },
@@ -33,10 +36,10 @@ export const Default: Story = {
   args: {
     children: "This is a card",
     variant: "default",
-    padding: "p-6",
-    radius: "rounded-lg",
-    prefix: "elementa",
+    // padding: "p-6",
+    prefix: "e-ui",
     density: "default",
+    size: "xs",
     isLoading: false,
   },
 };
@@ -55,7 +58,7 @@ export const Variants: Story = {
 
 export const Densities: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="">
       {["default", "compact"].map((d) => (
         <Card key={d} density={d as any}>
           Density: {d}
@@ -71,5 +74,6 @@ export const SkeletonState: Story = {
     variant: "outlined",
     padding: "p-4",
     radius: "rounded-md",
+    size: "xs",
   },
 };

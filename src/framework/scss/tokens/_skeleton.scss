@@ -1,0 +1,14 @@
+// Skeleton Size Tokens
+$e-skeleton-sizes: (
+  xs: var(--e-ui-space-x-small),
+  sm: var(--e-ui-space-small),
+  md: var(--e-ui-space-medium),
+  lg: var(--e-ui-space-large),
+  xl: var(--e-ui-space-x-large),
+);
+
+// Skeleton Radius Tokens
+$e-skeleton-radius: (
+  rounded: var(--e-ui-radius-lg),
+  circle: var(--e-ui-radius-full),
+);

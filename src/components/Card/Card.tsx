@@ -1,15 +1,8 @@
 /**
  * @file Card.tsx
- * @description A reusable Card component for Elementa UI with variant support, padding, radius, and configurable tag/HTML element.
+ * @description A reusable Card component for Elementa UI with variant support, density, padding, radius, skeleton loading, and configurable tag/HTML element.
  * @date 2025-07-21
  * @author Andzisi Mabaso
- */
-
-/**
- * @file Card.tsx
- * @description A configurable Card component supporting variants, loading, density, skeleton state, and class prefixing for design systems like Elementa UI.
- * @date 2025-07-20
- * @author
  */
 
 import clsx from "clsx";
@@ -20,13 +13,14 @@ export const Card = ({
   children,
   variant = "default",
   padding = "default",
-  radius = "default",
+  // radius = "default",
+  density = "default",
   prefix = cardConfig.prefix,
   className,
+  size,
   as: Component = "div",
   loading = false,
   skeleton,
-  density = "default",
   styleOverrides = {},
   ...props
 }: CardProps) => {
@@ -37,19 +31,16 @@ export const Card = ({
 
   const mergedPadding = {
     ...cardConfig.padding,
-    ...styleOverrides.padding,
-  };
-
-  const mergedRadius = {
-    ...cardConfig.radius,
-    ...styleOverrides.radius,
+    ...(typeof styleOverrides.padding === "object"
+      ? styleOverrides.padding
+      : {}),
   };
 
   const cardClasses = clsx(
     `${prefix}-card`,
     mergedVariants[variant],
     mergedPadding[density === "compact" ? "compact" : padding],
-    mergedRadius[radius],
+    size && `${prefix}-card-${size}`,
     className
   );
 
@@ -65,5 +56,58 @@ const CardSkeleton = () => (
     <div className="h-5 bg-gray-300 rounded w-3/4" />
     <div className="h-4 bg-gray-200 rounded w-2/3" />
     <div className="h-4 bg-gray-200 rounded w-1/2" />
+  </div>
+);
+
+Card.Title = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => <h3 className={clsx("u-ui-card-title", className)}>{children}</h3>;
+
+Card.Description = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => <p className={clsx("u-ui-card-description", className)}>{children}</p>;
+
+Card.Badge = ({
+  children,
+  variant = "default",
+  className,
+}: {
+  children: React.ReactNode;
+  variant?: "research" | "development" | "default";
+  className?: string;
+}) => (
+  <span className={clsx("u-ui-badge", `u-ui-badge--${variant}`, className)}>
+    {children}
+  </span>
+);
+
+Card.Footer = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => <div className={clsx("u-ui-card-footer", className)}>{children}</div>;
+
+Card.Meta = ({
+  children,
+  icon,
+  className,
+}: {
+  children: React.ReactNode;
+  icon?: React.ReactNode | string;
+  className?: string;
+}) => (
+  <div className={clsx("u-ui-card-meta", className)}>
+    {typeof icon === "string" ? <i className={`icon-${icon}`} /> : icon}
+    {children}
   </div>
 );
