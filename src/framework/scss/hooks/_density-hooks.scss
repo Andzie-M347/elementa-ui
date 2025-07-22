@@ -1,0 +1,73 @@
+@use "sass:map";
+
+// Design Tokens for default and compact
+$elementa-density-default: (
+  padding-y: var(--e-ui-space-x-small),
+  padding-x: var(--e-ui-space-x-small),
+  gap: var(--e-ui-space-small),
+  font-size: var(--e-ui-font-size-14),
+);
+
+$elementa-density-compact: (
+  padding-y: 0.5rem,
+  padding-x: 0.75rem,
+  gap: 0.5rem,
+  font-size: 0.8125rem,
+);
+
+// All densities for scale and extensibility
+$elementa-densities: (
+  default: $elementa-density-default,
+  compact: $elementa-density-compact,
+);
+
+// Utility to expand shorthands like padding-y/padding-x
+@function normalize-density-properties($props) {
+  $normalized: ();
+
+  @each $prop, $value in $props {
+    @if $prop == "padding-y" {
+      $normalized: map.merge(
+        $normalized,
+        (
+          padding-top: $value,
+          padding-bottom: $value,
+        )
+      );
+    } @else if $prop == "padding-x" {
+      $normalized: map.merge(
+        $normalized,
+        (
+          padding-left: $value,
+          padding-right: $value,
+        )
+      );
+    } @else {
+      $normalized: map.merge(
+        $normalized,
+        (
+          $prop: $value,
+        )
+      );
+    }
+  }
+
+  @return $normalized;
+}
+
+// Mixin to apply density styles for a given prefix and type
+@mixin elementa-density($prefix, $density-name) {
+  $config: map.get($elementa-densities, $density-name);
+
+  @if $config == null {
+    @error "Unknown density '#{$density-name}'. Supported values: #{map.keys($elementa-densities)}.";
+  }
+
+  $normalized-config: normalize-density-properties($config);
+
+  .#{$prefix}-card-density--#{$density-name} {
+    @each $property, $value in $normalized-config {
+      #{$property}: #{$value};
+    }
+  }
+}

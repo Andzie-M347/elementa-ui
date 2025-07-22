@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Card } from "./Card";
+import { Badge } from "../Badge";
+import { Icon } from "../../framework/icons";
 
 const meta: Meta<typeof Card> = {
   title: "Components/Card",
@@ -75,5 +77,34 @@ export const SkeletonState: Story = {
     padding: "p-4",
     radius: "rounded-md",
     size: "xs",
+  },
+};
+
+export const WithBadgeAndFooter: Story = {
+  args: {
+    variant: "outlined",
+    padding: "default",
+    size: "xs",
+    // radius: "rounded",
+    density: "default",
+    children: (
+      <>
+        <Card.Title className="e-ui-color_neutral-black e-ui-font-bold">
+          New Research Project
+        </Card.Title>
+        <Card.Description className="e-ui-color_medium-grey e-ui-text-12">
+          Explore insights from our most recent studies in UX engineering.
+        </Card.Description>
+        <Badge variant="primary">Research</Badge>
+        <Card.Footer>
+          <Card.Meta
+            className="e-ui-text-12 e-ui-color_medium-grey e-ui-font-semibold"
+            icon={<Icon name="calendar" size="sm" color="currentColor" />}
+          >
+            Tomorrow
+          </Card.Meta>
+        </Card.Footer>
+      </>
+    ),
   },
 };

@@ -16,7 +16,7 @@
 @use "./hooks/borders-hooks" as borders_hooks;
 @use "./hooks/skeleton-hooks" as skeleton_hooks;
 @use "./hooks/card-hooks" as card_hooks;
-
+@use "./hooks/density-hooks" as density_hooks;
 @use "./base-reset.scss" as reset;
 
 @use "./utils/mixins" as *;
@@ -56,4 +56,8 @@
   @include typography_hooks.typography-styling-hooks($prefix);
   @include borders_hooks.borders-styling-hooks($prefix);
   @include card_hooks.card-styling-hooks($prefix);
+
+  // Card densities
+  @include density_hooks.elementa-density($prefix, default);
+  @include density_hooks.elementa-density($prefix, compact);
 }

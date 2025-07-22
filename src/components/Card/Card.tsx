@@ -40,6 +40,7 @@ export const Card = ({
     `${prefix}-card`,
     mergedVariants[variant],
     mergedPadding[density === "compact" ? "compact" : padding],
+    `${prefix}-card-density--${density}`,
     size && `${prefix}-card-${size}`,
     className
   );
@@ -65,7 +66,7 @@ Card.Title = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <h3 className={clsx("u-ui-card-title", className)}>{children}</h3>;
+}) => <h3 className={clsx("e-ui-card-title", className)}>{children}</h3>;
 
 Card.Description = ({
   children,
@@ -73,21 +74,7 @@ Card.Description = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <p className={clsx("u-ui-card-description", className)}>{children}</p>;
-
-Card.Badge = ({
-  children,
-  variant = "default",
-  className,
-}: {
-  children: React.ReactNode;
-  variant?: "research" | "development" | "default";
-  className?: string;
-}) => (
-  <span className={clsx("u-ui-badge", `u-ui-badge--${variant}`, className)}>
-    {children}
-  </span>
-);
+}) => <p className={clsx("e-ui-card-description", className)}>{children}</p>;
 
 Card.Footer = ({
   children,
@@ -95,7 +82,7 @@ Card.Footer = ({
 }: {
   children: React.ReactNode;
   className?: string;
-}) => <div className={clsx("u-ui-card-footer", className)}>{children}</div>;
+}) => <div className={clsx("e-ui-card-footer", className)}>{children}</div>;
 
 Card.Meta = ({
   children,
@@ -106,7 +93,7 @@ Card.Meta = ({
   icon?: React.ReactNode | string;
   className?: string;
 }) => (
-  <div className={clsx("u-ui-card-meta", className)}>
+  <div className={clsx("e-ui-card-meta", className)}>
     {typeof icon === "string" ? <i className={`icon-${icon}`} /> : icon}
     {children}
   </div>
