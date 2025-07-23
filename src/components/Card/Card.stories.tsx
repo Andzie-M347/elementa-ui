@@ -1,8 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-
 import { Card, CardSkeleton } from "./Card";
 import { Badge } from "../Badge";
 import { Icon } from "../../framework/icons";
+import { IMAGE_OPTIONS } from "./card.image.options";
+
+type ImageKey = keyof typeof IMAGE_OPTIONS;
 
 const meta: Meta<typeof Card> = {
   title: "Components/Card",
@@ -27,7 +29,6 @@ const meta: Meta<typeof Card> = {
     prefix: { control: "text" },
     as: { control: "text" },
 
-    // Skeleton toggles
     showTitle: { control: "boolean" },
     showDescription: { control: "boolean" },
     showBadge: { control: "boolean" },
@@ -36,6 +37,7 @@ const meta: Meta<typeof Card> = {
 };
 
 export default meta;
+
 type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
@@ -83,41 +85,140 @@ export const WithBadgeAndFooter: Story = {
     showBadge: true,
     badgeText: "Research",
     showFooter: true,
-    footerDate: "Tomorrow",
+    footerDate: "2025-09-10",
     variant: "outlined",
     size: "xs",
     density: "default",
   },
-  render: (args) => (
-    <Card {...args}>
-      <>
-        {args.showTitle && (
-          <Card.Title className="e-ui-color_neutral-black e-ui-font-bold">
-            {args.title}
-          </Card.Title>
-        )}
+  render: ({
+    showTitle,
+    title,
+    showDescription,
+    description,
+    showBadge,
+    badgeText,
+    showFooter,
+    footerDate,
+    ...cardProps
+  }) => (
+    <Card {...cardProps}>
+      {showTitle && (
+        <Card.Title className="e-ui-color_neutral-black e-ui-font-bold">
+          {title}
+        </Card.Title>
+      )}
 
-        {args.showDescription && (
-          <Card.Description className="e-ui-color_medium-grey e-ui-text-12">
-            {args.description}
-          </Card.Description>
-        )}
+      {showDescription && (
+        <Card.Description className="e-ui-color_medium-grey e-ui-text-12">
+          {description}
+        </Card.Description>
+      )}
 
-        {args.showBadge && <Badge variant="primary">{args.badgeText}</Badge>}
+      {showBadge && <Badge variant="primary">{badgeText}</Badge>}
 
-        {args.showFooter && (
-          <Card.Footer>
-            <Card.Meta
-              className="e-ui-text-12 e-ui-color_medium-grey e-ui-font-semibold"
-              icon={<Icon name="calendar" size="sm" color="currentColor" />}
-            >
-              {new Date(args.footerDate).toLocaleDateString()}
-            </Card.Meta>
-          </Card.Footer>
-        )}
-      </>
+      {showFooter && (
+        <Card.Footer>
+          <Card.Meta
+            className="e-ui-text-12 e-ui-color_medium-grey e-ui-font-semibold"
+            icon={<Icon name="calendar" size="sm" color="currentColor" />}
+          >
+            {new Date(footerDate).toLocaleDateString("en-ZA", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
+          </Card.Meta>
+        </Card.Footer>
+      )}
     </Card>
   ),
+};
+
+export const WithImage: StoryObj<typeof Card> = {
+  args: {
+    imageKey: "Nature",
+    showImage: true,
+    showTitle: true,
+    title: "Nature Retreat",
+    showDescription: true,
+    description:
+      "Discover a curated nature experience crafted by our design and research teams.",
+    showBadge: true,
+    badgeText: "Nature",
+    showFooter: true,
+    footerDate: "Sept 5–7",
+    variant: "outlined",
+    size: "sm",
+    density: "default",
+  },
+  argTypes: {
+    imageKey: {
+      name: "Image",
+      control: "select",
+      options: Object.keys(IMAGE_OPTIONS),
+    },
+    showImage: { control: "boolean" },
+    showTitle: { control: "boolean" },
+    title: { control: "text" },
+    showDescription: { control: "boolean" },
+    description: { control: "text" },
+    showBadge: { control: "boolean" },
+    badgeText: { control: "text" },
+    showFooter: { control: "boolean" },
+    footerDate: { control: "text" },
+  },
+  render: (args) => {
+    const {
+      imageKey,
+      showImage,
+      showTitle,
+      title,
+      showDescription,
+      description,
+      showBadge,
+      badgeText,
+      showFooter,
+      footerDate,
+      ...rest
+    } = args;
+
+    const imageSrc = IMAGE_OPTIONS[imageKey as ImageKey];
+
+    return (
+      <Card {...rest}>
+        <>
+          {showImage && (
+            <Card.Image src={imageSrc} alt={`${imageKey} preview`} />
+          )}
+
+          {showTitle && (
+            <Card.Title className="e-ui-font-semibold e-ui-text-14">
+              {title}
+            </Card.Title>
+          )}
+
+          {showDescription && (
+            <Card.Description className="e-ui-text-12 e-ui-color_medium-grey">
+              {description}
+            </Card.Description>
+          )}
+
+          {showBadge && <Badge variant="primary">{badgeText}</Badge>}
+
+          {showFooter && (
+            <Card.Footer>
+              <Card.Meta
+                icon={<Icon name="calendar" size="sm" color="currentColor" />}
+                className="e-ui-text-12 e-ui-color_medium-grey"
+              >
+                {footerDate}
+              </Card.Meta>
+            </Card.Footer>
+          )}
+        </>
+      </Card>
+    );
+  },
 };
 
 export const SkeletonStates: Story = {
@@ -132,18 +233,29 @@ export const SkeletonStates: Story = {
     showBadge: true,
     showFooter: true,
   },
-  render: (args) => (
+  render: ({
+    loading,
+    prefix,
+    size,
+    density,
+    showTitle,
+    showDescription,
+    showBadge,
+    showFooter,
+    ...rest
+  }) => (
     <Card
-      {...args}
+      {...rest}
+      loading={loading}
       skeleton={
         <CardSkeleton
-          prefix={args.prefix}
-          size={args.size}
-          density={args.density}
-          showTitle={args.showTitle}
-          showDescription={args.showDescription}
-          showBadge={args.showBadge}
-          showFooter={args.showFooter}
+          prefix={prefix}
+          size={size}
+          density={density}
+          showTitle={showTitle}
+          showDescription={showDescription}
+          showBadge={showBadge}
+          showFooter={showFooter}
         />
       }
     />

@@ -8,6 +8,7 @@
 import clsx from "clsx";
 import { memo } from "react";
 import { cardConfig } from "./card.config";
+// import type { CardComponentType } from "./Card.types";
 
 interface CardProps {
   children: React.ReactNode;
@@ -272,6 +273,26 @@ Card.Meta = ({
   <div className={clsx(`${cardConfig.prefix}-card-meta`, className)} {...props}>
     {typeof icon === "string" ? <i className={`icon-${icon}`} /> : icon}
     <span>{children}</span>
+  </div>
+);
+
+Card.Image = ({
+  src,
+  alt,
+  className,
+  ...props
+}: {
+  src: string;
+  alt?: string;
+  className?: string;
+} & React.ImgHTMLAttributes<HTMLImageElement>) => (
+  <div className={`${cardConfig.prefix}-card-image-wrapper`}>
+    <img
+      src={src}
+      alt={alt || ""}
+      className={clsx(`${cardConfig.prefix}-card-image`, className)}
+      {...props}
+    />
   </div>
 );
 
