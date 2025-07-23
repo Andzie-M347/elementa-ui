@@ -18,6 +18,7 @@
 @use "./hooks/card-hooks" as card_hooks;
 @use "./hooks/density-hooks" as density_hooks;
 @use "./base-reset.scss" as reset;
+@use "./hooks/layout-flex-hooks" as layout_hooks;
 
 @use "./utils/mixins" as *;
 
@@ -56,6 +57,7 @@
   @include typography_hooks.typography-styling-hooks($prefix);
   @include borders_hooks.borders-styling-hooks($prefix);
   @include card_hooks.card-styling-hooks($prefix);
+  @include layout_hooks.layout-flex-styling-hooks($prefix);
 
   // Card densities
   @include density_hooks.elementa-density($prefix, default);

@@ -28,6 +28,8 @@ $direction-shorthands: (
   ),
 );
 
+/// Generates padding or margin utility classes with directional support.
+/// E.g., .e-ui-p-x_small → padding-left/right: var(--e-ui-space-x_small)
 @mixin spacing-size-compile($prefix, $dir, $spacing-map, $isPadding: true) {
   @each $size, $val in $spacing-map {
     $class: #{$prefix}-#{if($isPadding, "p", "m")}-#{$dir}_#{$size};
@@ -47,17 +49,30 @@ $direction-shorthands: (
   }
 }
 
-@mixin spacing-styling-hooks($prefix) {
+/// Outputs gap utility classes from spacing map
+/// E.g., .e-ui-gap-small { gap: var(--e-ui-space-small) }
+@mixin spacing-gap-hooks($prefix, $spacing-map) {
+  @each $size, $val in $spacing-map {
+    .#{$prefix}-gap-#{$size} {
+      gap: var(--#{$prefix}-space-#{$size});
+    }
+  }
+}
+
+@mixin spacing-styling-hooks($prefix, $spacing-map: null) {
+  $map: if(
+    $spacing-map == null,
+    spacing.$elementa-spacing-values,
+    $spacing-map
+  );
+
   $dirs: ("x", "y", "t", "r", "b", "l", "all");
 
   @each $isPadding in (true, false) {
     @each $dir in $dirs {
-      @include spacing-size-compile(
-        $prefix,
-        $dir,
-        spacing.$spacing-values,
-        $isPadding
-      );
+      @include spacing-size-compile($prefix, $dir, $map, $isPadding);
     }
   }
+
+  @include spacing-gap-hooks($prefix, $map);
 }

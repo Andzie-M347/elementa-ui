@@ -1,6 +1,6 @@
 @use "sass:map";
 
-$spacing-values: (
+$elementa-spacing-values: (
   "xxx-small": 0.125rem,
   "xx-small": 0.25rem,
   "x-small": 0.5rem,
@@ -13,10 +13,14 @@ $spacing-values: (
   "xxxx-large": 3.5rem,
 ) !default;
 
+/// @function get-spacing-vars
+/// @description Generates CSS custom properties from spacing tokens
+/// @param $prefix {String}
+/// @return {Map}
 @function get-spacing-vars($prefix) {
   $output: ();
 
-  @each $size, $value in $spacing-values {
+  @each $size, $value in $elementa-spacing-values {
     $key: "--#{$prefix}-space-#{$size}";
     $output: map.merge(
       $output,

@@ -1,0 +1,87 @@
+/// @mixin layout-flex-hooks
+/// @description Generates utility classes for flexbox layout (excluding gaps)
+/// @param {String} $prefix - The utility class prefix (e.g., `e-ui`)
+@mixin layout-flex-styling-hooks($prefix) {
+  // === Flex Display ===
+  .#{$prefix}-flex {
+    display: flex;
+  }
+  .#{$prefix}-inline-flex {
+    display: inline-flex;
+  }
+
+  // === Flex Wrap ===
+  $wrap-modes: ("wrap", "nowrap", "wrap-reverse");
+  @each $mode in $wrap-modes {
+    .#{$prefix}-flex-#{$mode} {
+      flex-wrap: $mode;
+    }
+  }
+
+  // === Flex Direction ===
+  $directions: ("row", "row-reverse", "column", "column-reverse");
+  @each $dir in $directions {
+    .#{$prefix}-flex-dir-#{$dir} {
+      flex-direction: $dir;
+    }
+  }
+
+  // === Justify Content ===
+  $justify-map: (
+    "start": flex-start,
+    "center": center,
+    "end": flex-end,
+    "between": space-between,
+    "around": space-around,
+    "evenly": space-evenly,
+  );
+  @each $key, $value in $justify-map {
+    .#{$prefix}-justify-#{$key} {
+      justify-content: $value;
+    }
+  }
+
+  // === Align Items ===
+  $align-items-map: (
+    "start": flex-start,
+    "center": center,
+    "end": flex-end,
+    "stretch": stretch,
+    "baseline": baseline,
+  );
+  @each $key, $value in $align-items-map {
+    .#{$prefix}-items-#{$key} {
+      align-items: $value;
+    }
+  }
+
+  // === Align Content ===
+  $align-content-map: (
+    "start": flex-start,
+    "center": center,
+    "end": flex-end,
+    "between": space-between,
+    "around": space-around,
+    "stretch": stretch,
+  );
+  @each $key, $value in $align-content-map {
+    .#{$prefix}-content-#{$key} {
+      align-content: $value;
+    }
+  }
+
+  // === Align Self (for child elements) ===
+  $align-self-map: (
+    "auto": auto,
+    "start": flex-start,
+    "center": center,
+    "end": flex-end,
+    "stretch": stretch,
+    "baseline": baseline,
+  );
+  @each $key, $value in $align-self-map {
+    .#{$prefix}-self-#{$key} {
+      align-self: $value;
+    }
+  }
+}
