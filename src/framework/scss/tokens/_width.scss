@@ -5,6 +5,31 @@ $width-values: (
   "auto": auto,
   "fit": fit-content,
   "screen": 100vw,
+
+  "1of2": 50%,
+  "1of3": 33.333333%,
+  "2of3": 66.666667%,
+  "1of4": 25%,
+  "3of4": 75%,
+  "1of5": 20%,
+  "2of5": 40%,
+  "3of5": 60%,
+  "4of5": 80%,
+  "1of6": 16.666667%,
+  "5of6": 83.333333%,
+
+  "4": 1rem,
+  "6": 1.5rem,
+  "12": 3rem,
+  "16": 4rem,
+  "20": 5rem,
+  "24": 6rem,
+  "32": 8rem,
+  "40": 10rem,
+  "48": 12rem,
+  "64": 16rem,
+  "80": 20rem,
+  "96": 24rem,
 ) !default;
 
 @function get-width-vars($prefix) {

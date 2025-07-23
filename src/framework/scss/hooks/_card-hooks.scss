@@ -13,6 +13,11 @@ $card-max-widths: (
     flex-direction: column;
   }
 
+  .#{$prefix}-card-meta {
+    display: flex;
+    gap: var(--e-ui-space-xx-small);
+  }
+
   // Max-width utilities
   @each $size, $value in $card-max-widths {
     .#{$prefix}-card-#{$size} {

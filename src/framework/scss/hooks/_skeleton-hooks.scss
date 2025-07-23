@@ -16,6 +16,11 @@ $skeleton-radii: (
 ) !default;
 
 @mixin skeleton-styling-hooks($prefix) {
+  .#{$prefix}-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-ui-space-x-small);
+  }
   .#{$prefix}-skeleton-ldr {
     @include skeleton-base;
   }
