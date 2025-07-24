@@ -17,6 +17,7 @@ $elementa-spacing-values: (
 /// @description Generates CSS custom properties from spacing tokens
 /// @param $prefix {String}
 /// @return {Map}
+
 @function get-spacing-vars($prefix) {
   $output: ();
 

@@ -6,6 +6,7 @@
 @use "./tokens/typography" as typography;
 @use "./tokens/fonts" as fonts;
 @use "./tokens/borders" as borders;
+@use "./tokens/shadow" as shadow;
 
 @use "./hooks/colour-hooks" as color_hooks;
 @use "./hooks/spacing-hooks" as spacing_hooks;
@@ -17,6 +18,7 @@
 @use "./hooks/skeleton-hooks" as skeleton_hooks;
 @use "./hooks/card-hooks" as card_hooks;
 @use "./hooks/density-hooks" as density_hooks;
+@use "./hooks/shadow-hooks" as shadow_hooks;
 @use "./base-reset.scss" as reset;
 @use "./hooks/layout-flex-hooks" as layout_hooks;
 
@@ -27,6 +29,7 @@
 
   @at-root :root {
     @include generate-css-vars(spacing.get-spacing-vars($prefix));
+    @include generate-css-vars(shadow.get-shadow-vars($prefix));
     @include generate-css-vars(radius.get-radius-vars($prefix));
     @include generate-css-vars(width.get-width-vars($prefix));
     @include generate-css-vars(height.get-height-vars($prefix));
@@ -58,6 +61,7 @@
   @include borders_hooks.borders-styling-hooks($prefix);
   @include card_hooks.card-styling-hooks($prefix);
   @include layout_hooks.layout-flex-styling-hooks($prefix);
+  @include shadow_hooks.shadow-styling-hooks($prefix);
 
   // Card densities
   @include density_hooks.elementa-density($prefix, default);

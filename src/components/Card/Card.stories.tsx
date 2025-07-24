@@ -53,7 +53,7 @@ export const Default: Story = {
 
 export const Variants: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="e-ui-flex e-ui-gap-small e-ui-flex-dir-column">
       {["outlined", "elevated"].map((v) => (
         <Card key={v} variant={v as any}>
           Variant: {v}
@@ -65,7 +65,7 @@ export const Variants: Story = {
 
 export const Densities: Story = {
   render: () => (
-    <div className="space-y-4">
+    <div className="e-ui-flex e-ui-gap-small e-ui-flex-dir-column">
       {["default", "compact"].map((d) => (
         <Card key={d} density={d as any}>
           Density: {d}

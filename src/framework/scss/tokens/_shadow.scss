@@ -1,0 +1,51 @@
+@use "sass:map";
+
+$elementa-spacing-values: (
+  "xxx-small": 0.125rem,
+  "xx-small": 0.25rem,
+  "x-small": 0.5rem,
+  "small": 0.75rem,
+  "medium": 1rem,
+  "large": 1.5rem,
+  "x-large": 2rem,
+  "xx-large": 2.5rem,
+  "xxx-large": 3rem,
+  "xxxx-large": 3.5rem,
+) !default;
+
+// Define box shadow values using spacing tokens
+$elementa-shadow-values: (
+  "none": none,
+  "xxx-small": 0 0.125rem 0.25rem 0 rgba(30, 41, 59, 0.05),
+  "xx-small": 0 0.25rem 0.5rem 0 rgba(30, 41, 59, 0.08),
+  "x-small": 0 0.5rem 1rem 0 rgba(30, 41, 59, 0.1),
+  "small": 0 0.75rem 1.5rem 0 rgba(30, 41, 59, 0.12),
+  "medium": 0 1rem 2rem 0 rgba(30, 41, 59, 0.15),
+  "large": 0 1.5rem 3rem 0 rgba(30, 41, 59, 0.2),
+  "x-large": 0 2rem 4rem 0 rgba(30, 41, 59, 0.25),
+  "xx-large": 0 2.5rem 5rem 0 rgba(30, 41, 59, 0.3),
+  "xxx-large": 0 3rem 6rem 0 rgba(30, 41, 59, 0.35),
+  "xxxx-large": 0 3.5rem 7rem 0 rgba(30, 41, 59, 0.4),
+  "inner": inset 0 0.25rem 0.5rem 0 rgba(30, 41, 59, 0.1),
+) !default;
+
+/// @function get-shadow-vars
+/// @description Generates CSS custom properties for box shadow tokens
+/// @param $prefix {String} - Prefix for the CSS custom properties (e.g., 'e-ui')
+/// @return {Map}
+
+@function get-shadow-vars($prefix) {
+  $output: ();
+
+  @each $size, $value in $elementa-shadow-values {
+    $key: "--#{$prefix}-shadow-#{$size}";
+    $output: map.merge(
+      $output,
+      (
+        $key: $value,
+      )
+    );
+  }
+
+  @return $output;
+}
