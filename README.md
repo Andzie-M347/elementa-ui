@@ -1,88 +1,69 @@
-# Elementa
+# React + TypeScript + Vite
 
-**Elementa** is a reusable React component library designed for modern enterprise dashboards, SaaS applications, and internal tools.  
-Built with **TypeScript** and **Storybook**, Elementa provides a consistent, accessible set of UI components — optimized for developer productivity and user experience.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently used in:
+Currently, two official plugins are available:
 
-- [TaskForge App](https://github.com/Andzie-M347/taskforge-app) — Project management SaaS platform.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
----
+## Expanding the ESLint configuration
 
-## ✨ Features
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-- **Typed components** with full TypeScript support
-- Built with **TailwindCSS** for flexible theming
-- Fully documented via **Storybook**
-- **Accessibility-first** (WCAG 2.1 AA compliant)
-- Easy to integrate in React (Next.js) apps
-- Designed for real-world use — form elements, layout primitives, navigation, modals, data display
-- Versioned & published (npm or GitHub Packages)
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
----
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-## 📦 Installation
-
-```bash
-# Once published to npm or GitHub Packages:
-npm install @Andzie-M347/elementa
-# or
-yarn add @Andzie-M347/elementa
-````
-
----
-
-## 🛠 Usage
-
-```tsx
-import { Button, Card, Modal } from '@Andzie-M347/elementa';
-
-<Button variant="primary">Click me</Button>
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
----
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-## 🚀 Development
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-```bash
-# Clone the repo
-git clone https://github.com/Andzie-M347/elementa.git
-cd elementa
-
-# Install dependencies
-npm install
-
-# Run Storybook
-npm run storybook
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
----
-
-## 🧩 Components (initial set)
-
-* Button (all variants)
-* Input + Form Elements
-* Modal
-* Card
-* Badge / Tag
-* Table (basic / sortable)
-* Alert / Notification
-* Avatar
-* Spinner / Loader
-* Layout grid / spacing components
-
----
-
-## 🔗 Related Projects
-
-* [TaskForge App](https://github.com/Andzie-M347/taskforge-app) — uses Elementa as its component library.
-
----
-
-## 📄 License
-
-[MIT](LICENSE)
-
----
-
-Built and maintained by **Andzisi**.

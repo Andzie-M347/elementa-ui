@@ -1,0 +1,15 @@
+/// @module icons-module
+/// @description Generates styling hooks for icon components using CSS custom properties.
+/// @param {String} $prefix - Component prefix (e.g., `e-ui`)
+@mixin icons-module($prefix) {
+  .#{$prefix}-icon {
+    path {
+      stroke: var(--#{$prefix}-icon-color, currentColor);
+    }
+
+    // TO BE ADDED LATER
+    // &[style*="--#{$prefix}-stroke-width"] path {
+    //   stroke-width: var(--#{$prefix}-stroke-width);
+    // }
+  }
+}

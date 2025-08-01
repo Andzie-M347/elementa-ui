@@ -5,7 +5,6 @@ type IconProps = {
   name: IconName;
   size?: "sm" | "md" | "lg" | number;
   color?: string;
-  strokeWidth?: number | string;
   className?: string;
 };
 
@@ -19,7 +18,6 @@ export const Icon = ({
   name,
   size = "md",
   color = "currentColor",
-  strokeWidth,
   className = "",
 }: IconProps) => {
   const SvgIcon = iconMap[name];
@@ -38,8 +36,7 @@ export const Icon = ({
       style={{
         width: resolvedSize,
         height: resolvedSize,
-        stroke: color,
-        strokeWidth,
+        color: color,
       }}
       aria-hidden="true"
       focusable="false"

@@ -1,31 +1,20 @@
-import type { Preview } from '@storybook/react-vite'
-import { withA11y } from '@storybook/addon-a11y';
-
-
-import '../src/framework/css/dist/elementa-ui.min.css'
-
-// export const decorators = [withA11y];
-
-
-export const parameters = {
-  controls: {
-    expanded: true,
-  },
-  docs: {
-    label: 'Documentation',
-    controls: {
-      sort: 'requiredFirst',
-    },
-  },
-};
+import type { Preview } from "@storybook/react-vite";
+import "../src/framework/css/dist/elementa-ui.min.css";
 
 const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
+    },
+
+    a11y: {
+      // 'todo' - show a11y violations in the test UI only
+      // 'error' - fail CI on a11y violations
+      // 'off' - skip a11y checks entirely
+      test: "todo",
     },
   },
 };

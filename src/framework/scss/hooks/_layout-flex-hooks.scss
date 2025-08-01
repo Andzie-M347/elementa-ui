@@ -1,3 +1,5 @@
+@use "sass:string";
+
 /// @mixin layout-flex-styling-hooks
 /// @description Generates utility classes for flexbox layout (excluding gaps)
 /// @param {String} $prefix - The utility class prefix (e.g., `e-ui`)
@@ -15,7 +17,7 @@
   $wrap-modes: ("wrap", "nowrap", "wrap-reverse");
   @each $mode in $wrap-modes {
     .#{$prefix}-flex-#{$mode} {
-      flex-wrap: unquote($mode);
+      flex-wrap: string.unquote($mode);
     }
   }
 
@@ -23,7 +25,7 @@
   $directions: ("row", "row-reverse", "column", "column-reverse");
   @each $dir in $directions {
     .#{$prefix}-flex-dir-#{$dir} {
-      flex-direction: unquote($dir);
+      flex-direction: string.unquote($dir);
     }
   }
 
@@ -38,7 +40,7 @@
   );
   @each $key, $value in $justify-map {
     .#{$prefix}-justify-#{$key} {
-      justify-content: unquote($value);
+      justify-content: string.unquote($value);
     }
   }
 
@@ -52,7 +54,7 @@
   );
   @each $key, $value in $align-items-map {
     .#{$prefix}-items-#{$key} {
-      align-items: unquote($value);
+      align-items: string.unquote($value);
     }
   }
 
@@ -67,7 +69,7 @@
   );
   @each $key, $value in $align-content-map {
     .#{$prefix}-content-#{$key} {
-      align-content: unquote($value);
+      align-content: string.unquote($value);
     }
   }
 
@@ -82,7 +84,7 @@
   );
   @each $key, $value in $align-self-map {
     .#{$prefix}-self-#{$key} {
-      align-self: unquote($value);
+      align-self: string.unquote($value);
     }
   }
 }

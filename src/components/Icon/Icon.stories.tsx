@@ -2,7 +2,19 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Icon } from "../../framework/icons";
 import { iconMap, type IconName } from "../../framework/icons/icon-map";
 
+type IconSize = "sm" | "md" | "lg" | number;
+
 const iconNames = Object.keys(iconMap) as IconName[];
+
+const SIZE_OPTIONS: IconSize[] = ["sm", "md", "lg", 32, 48];
+const ICON_WRAPPER_STYLE: React.CSSProperties = {
+  textAlign: "center",
+  width: "5rem",
+};
+const LABEL_STYLE: React.CSSProperties = {
+  fontSize: "0.75rem",
+  marginTop: "0.25rem",
+};
 
 const meta: Meta<typeof Icon> = {
   title: "Components/Icon",
@@ -12,43 +24,48 @@ const meta: Meta<typeof Icon> = {
     name: {
       control: { type: "select" },
       options: iconNames,
+      description: "Icon name from iconMap",
     },
     size: {
       control: { type: "select" },
-      options: ["sm", "md", "lg", 16, 24, 32, 48],
+      options: ["sm", "md", "lg"],
+      description: "Predefined icon sizes",
     },
     color: {
       control: { type: "color" },
-    },
-    strokeWidth: {
-      control: { type: "number" },
+      description: "Icon color (CSS color value)",
     },
     className: {
       control: { type: "text" },
+      description: "Optional custom class for the icon",
     },
   },
   args: {
     name: "arrowLeft",
     size: "md",
     color: "currentColor",
-    strokeWidth: 1.5,
   },
 };
 
 export default meta;
+
 type Story = StoryObj<typeof Icon>;
 
+/**
+ * Default icon story for visual regression and interactive controls.
+ */
 export const Default: Story = {};
 
+/**
+ * Renders a grid of all available icons for quick visual reference.
+ */
 export const AllIcons: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
       {iconNames.map((name) => (
-        <div key={name} style={{ textAlign: "center", width: "5rem" }}>
+        <div key={name} style={ICON_WRAPPER_STYLE}>
           <Icon {...args} name={name} />
-          <div style={{ fontSize: "0.75rem", marginTop: "0.25rem" }}>
-            {name}
-          </div>
+          <div style={LABEL_STYLE}>{name}</div>
         </div>
       ))}
     </div>
@@ -56,22 +73,20 @@ export const AllIcons: Story = {
   args: {
     size: "lg",
     color: "#64748b",
-    strokeWidth: 1.5,
   },
+  name: "All Icons Preview",
 };
 
+/**
+ * Demonstrates supported icon sizes using both tokens and numeric pixel values.
+ */
 export const Sizes: Story = {
-  render: ({ name, color, strokeWidth }) => (
+  render: (args) => (
     <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-      {["sm", "md", "lg", 32, 48].map((size) => (
+      {SIZE_OPTIONS.map((size) => (
         <div key={size.toString()} style={{ textAlign: "center" }}>
-          <Icon
-            name={name}
-            size={size as any}
-            color={color}
-            strokeWidth={strokeWidth}
-          />
-          <div style={{ fontSize: "0.75rem" }}>{size}</div>
+          <Icon {...args} size={size} />
+          <div style={LABEL_STYLE}>{size}</div>
         </div>
       ))}
     </div>
@@ -79,6 +94,6 @@ export const Sizes: Story = {
   args: {
     name: "star",
     color: "#2563eb",
-    strokeWidth: 2,
   },
+  name: "Size Variants",
 };
