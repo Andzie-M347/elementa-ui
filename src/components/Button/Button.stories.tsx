@@ -13,9 +13,9 @@ interface ButtonStoryProps extends Omit<ButtonProps, "icon"> {
 }
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: "Components/UI/Button",
   component: Button,
-  tags: ["autodocs"],
+  tags: ["autodocs", "ui", "button"],
   argTypes: {
     variant: {
       control: "select",

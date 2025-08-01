@@ -7,9 +7,9 @@ import { IMAGE_OPTIONS } from "./card.image.options";
 type ImageKey = keyof typeof IMAGE_OPTIONS;
 
 const meta: Meta<typeof Card> = {
-  title: "Components/Card",
+  title: "Components/UI/Card",
   component: Card,
-  tags: ["autodocs"],
+  tags: ["autodocs", "ui", "card"],
   argTypes: {
     variant: {
       control: "select",

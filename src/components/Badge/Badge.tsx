@@ -1,18 +1,21 @@
 /**
  * @file Badge.tsx
- * @description A configurable Badge component with support for variant styles and class prefixing for design systems like Elementa UI.
+ * @description A flexible Badge component with variant support, design token integration, and configurable prefixing for design systems like Elementa UI.
  * @date 2025-07-20
  * @author Andzisi Mabaso
  */
 
-import React from "react";
 import clsx from "clsx";
 import type { BadgeProps } from "./Badge.types";
-// import { BadgeProps } from './Badge.types';
 import { badgeConfig } from "./badge.config";
+import type { JSX } from "react";
 
-const getBadgeClasses = (variant: BadgeProps["variant"], prefix: string) =>
-  clsx(`${prefix}-badge`, `${prefix}-badge--sm`);
+/**
+ * Generates the base class name for the badge component.
+ * Applies the namespace prefix for consistency across design systems.
+ */
+const getBaseBadgeClass = (prefix: string): string =>
+  `${prefix}-badge ${prefix}-badge--sm`;
 
 export const Badge = ({
   children,
@@ -21,18 +24,21 @@ export const Badge = ({
   className,
   styleOverrides = {},
   ...props
-}: BadgeProps) => {
-  const mergedVariantStyles = {
-    ...badgeConfig.variantStyles,
-    ...styleOverrides.variantStyles,
+}: BadgeProps): JSX.Element => {
+  const { variantStyles: defaultVariantStyles = {} } = badgeConfig;
+
+  const { variantStyles: customVariantStyles = {} } = styleOverrides;
+
+  const variantClasses = {
+    ...defaultVariantStyles,
+    ...customVariantStyles,
   };
 
   return (
     <span
       className={clsx(
-        getBadgeClasses(variant, prefix),
-        "",
-        mergedVariantStyles[variant],
+        getBaseBadgeClass(prefix),
+        variantClasses[variant],
         className
       )}
       {...props}

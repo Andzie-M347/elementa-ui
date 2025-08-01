@@ -17,9 +17,9 @@ const LABEL_STYLE: React.CSSProperties = {
 };
 
 const meta: Meta<typeof Icon> = {
-  title: "Components/Icon",
+  title: "Components/UI/Icon",
   component: Icon,
-  tags: ["autodocs"],
+  tags: ["autodocs", "ui", "icon"],
   argTypes: {
     name: {
       control: { type: "select" },

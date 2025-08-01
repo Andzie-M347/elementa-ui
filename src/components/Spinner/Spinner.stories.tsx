@@ -1,25 +1,24 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import type { SpinnerProps } from './Spinner.types';
-import { Spinner } from './Spinner';
-
+import React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import type { SpinnerProps } from "./Spinner.types";
+import { Spinner } from "./Spinner";
 
 const meta: Meta<typeof Spinner> = {
-  title: 'Components/Spinner',
+  title: "Components/UI/Spinner",
   component: Spinner,
-  tags: ['autodocs'],
+  tags: ["autodocs", "ui", "spinner"],
   argTypes: {
     variant: {
-      control: { type: 'select' },
-      options: ['ring'],
+      control: { type: "select" },
+      options: ["ring"],
     },
     size: {
-      control: { type: 'radio' },
-      options: ['sm', 'md', 'lg'],
+      control: { type: "radio" },
+      options: ["sm", "md", "lg"],
     },
-    color: { control: 'color' },
-    speed: { control: 'text' },
-    className: { control: 'text'},
+    color: { control: "color" },
+    speed: { control: "text" },
+    className: { control: "text" },
   },
 };
 
@@ -28,13 +27,12 @@ type Story = StoryObj<SpinnerProps>;
 
 export const Ring: Story = {
   args: {
-    variant: 'ring',
-    size: 'md',
+    variant: "ring",
+    size: "md",
     color: undefined,
     speed: undefined,
   },
 };
-
 
 // ! Will be part of the upgrade
 // export const Dots: Story = {
